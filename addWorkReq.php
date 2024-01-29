@@ -19,7 +19,7 @@ include "init.php";
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <h2>اذن صرف جديد</h2>
+      <h2>أمر عمل جديد</h2>
     </div>
     <?php if (isset($_GET['customerID'])) {
       $customerID = $_GET['customerID'];
@@ -58,11 +58,19 @@ include "init.php";
               <div class="col-md-6 col-sm-12">
                 <label for="city" class="form-label">المنطقة</label>
                 <select class="form-select" id="city" name="city" required>
-                  <option value="<?php echo $customer['city']; ?>" selected><?php echo $customer['city']; ?></option>
-                  <option value="بنها"> بنها </option>
-                  <option value="طوخ"> طوخ </option>
-                  <option value="أخرى"> أخرى </option>
+                  <option selected value="" disabled>اختر...</option>
+                  <?php foreach ($cities as $city) { ?>
+                    <option value="<?php echo $city; ?>"> <?php echo $city; ?> </option>
+                  <?php } ?>
                 </select>
+
+                <div class="invalid-feedback">
+                  يرجى إدخال المنطقة
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <label for="city" class="form-label">المنطقة</label>
+                <input name="city" type="text" class="form-control" id="address" value="">
                 <div class="invalid-feedback">
                   يرجى إدخال المنطقة
                 </div>
@@ -70,7 +78,7 @@ include "init.php";
 
               <div class="col-md-6 col-sm-12">
                 <label for="address" class="form-label">عنوان </label>
-                <input name="address" type="text" class="form-control" id="address" value="<?php echo $customer['address']; ?>">
+                <input class="hidden" name="address" type="text" class="form-control" id="address" value="<?php echo $customer['address']; ?>">
               </div>
 
 
@@ -87,8 +95,8 @@ include "init.php";
                 </div>
               </div>
               <div class="col-sm-6">
-                <label for="serviceType" class="form-label"> نوع الخدمة</label>
-                <select class="form-select" id="serviceType" name="servicesType">
+                <label for="servicesType" class="form-label"> نوع الخدمة</label>
+                <select class="form-select" id="servicesType" name="servicesType">
                   <option value="">اختر...</option>
                   <?php foreach ($serviceTypes as $serviceType) { ?>
                     <option value="<?php echo $serviceType ?>"><?php echo $serviceType ?></option>
