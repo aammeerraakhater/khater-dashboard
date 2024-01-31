@@ -28,6 +28,19 @@ function changetechnician(id, technician) {
     xmlhttp.open("GET", "sendStatus.php?id=" + id + "&technician=" + technician, true);
     xmlhttp.send();
 }
+function addAlternitave(city, id, showedEleID, showedEleName) {
+    var element = document.getElementById(id);
+    if (city == 'أخرى') {
+        element.classList.remove("hidden");
+        document.getElementById(showedEleID).name = showedEleName;
+        document.getElementById(showedEleID).required = true;
+    } else {
+        element.classList.add("hidden");
+        document.getElementById(showedEleID).name = '';
+        document.getElementById(showedEleID).required = false;
+
+    }
+}
 // function shareXlsx(q) {
 //     var xmldownloadrequest = new XMLHttpRequest();
 //     xmldownloadrequest.open("GET", "saveXlsx.php?q=" + q, true);
