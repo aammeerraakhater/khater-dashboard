@@ -1,8 +1,4 @@
 <?php
-$title = "اضافه اذن عمل ";
-$delegants = array('احمد خاطر', 'هلال', 'مصطفى', 'مرسى', 'حسام', 'وهبه', 'الحاج محمد خاطر');
-$technicians = array('غريب', 'اسلام', 'توفيق', 'خليفه', 'محمد عزب', 'رأفت');
-$serviceTypes = array('تركيب', 'صيانه', 'أخري');
 $css = "style.css";
 include "init.php";
 ?>
@@ -48,12 +44,19 @@ include "init.php";
 
                         <div class="col-sm-6">
                             <label for="city" class="form-label">المنطقة</label>
-                            <select class="form-select" id="city" name="city" required>
+                            <select class="form-select" id="city" name="city" required onchange="addAlternitave(this.value, 'allCityAll', 'altCity', 'city')">
                                 <option value="" selected disabled>اختر...</option>
-                                <option value="بنها"> بنها </option>
-                                <option value="طوخ"> طوخ </option>
-                                <option value="أخرى"> أخرى </option>
+                                <?php foreach ($cities as $city) { ?>
+                                    <option value="<?php echo $city ?>"><?php echo $city ?></option>
+                                <?php } ?>
                             </select>
+                            <div class="invalid-feedback">
+                                يرجى إدخال المنطقة
+                            </div>
+                        </div>
+                        <div class="hidden col-sm-6" id="allCityAll">
+                            <label for="altCity" class="form-label">المنطقة</label>
+                            <input type="text" class="form-control" id="altCity" name="">
                             <div class="invalid-feedback">
                                 يرجى إدخال المنطقة
                             </div>
@@ -74,7 +77,11 @@ include "init.php";
 
                         <div class="col-12">
                             <label for="address" class="form-label">عنوان </label>
-                            <input name="address" type="text" class="form-control" id="address" placeholder="">
+                            <input name="address" type="text" class="form-control" id="address" placeholder="" required>
+                            <div class="invalid-feedback">
+                                يرجى إدخال العنوان
+                            </div>
+
                         </div>
 
                     </div>
@@ -96,7 +103,7 @@ include "init.php";
 
 
                     <button class="w-45 btn btn-primary btn-lg" name="submitCustomer" type="submit">حفظ</button>
-                    <button class="w-45 btn btn-primary btn-lg" name="submitCustomerWithWorkReq" type="submit">اضافه اذن عمل</button>
+                    <button class="w-45 btn btn-primary btn-lg" name="submitCustomerWithWorkReq" type="submit">حفظ و اضافه اذن عمل</button>
 
                     <hr class="my-4">
 
@@ -106,10 +113,4 @@ include "init.php";
     </main>
 </div>
 
-
-<script src="layout/js/bootstrap.bundle.min.js"></script>
-
-<script src="layout/js/form-validation.js"></script>
-</body>
-
-</html>
+<?php require_once 'includes/templates/footer.php'; ?>

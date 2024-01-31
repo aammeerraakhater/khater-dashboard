@@ -23,8 +23,12 @@ include "init.php";
     </div>
     <?php if (isset($_GET['customerID'])) {
       $customerID = $_GET['customerID'];
-      $customers =  getDataBasedID('customer', $customerID);
+      $customers = getBased('customer', 'customerID', $customerID, 'customerID');
       $customer = $customers->fetch_assoc();
+      $dbcity = $customer['city'];
+      array_push($cities, $dbcity);
+      $cities = array_unique($cities);
+
     ?>
       <div class="row">
         <div class="col-md-12 col-lg">
@@ -54,31 +58,32 @@ include "init.php";
                   </div>
                 </div>
               </div>
-
-              <div class="col-md-6 col-sm-12">
+              <div class="col-sm-6">
                 <label for="city" class="form-label">المنطقة</label>
-                <select class="form-select" id="city" name="city" required>
-                  <option selected value="" disabled>اختر...</option>
+                <select class="form-select" id="city" name="city" required onchange="addAlternitave(this.value, 'allCityAlt', 'altCity', 'city')">
+                  <option value="" selected disabled>اختر...</option>
                   <?php foreach ($cities as $city) { ?>
-                    <option value="<?php echo $city; ?>"> <?php echo $city; ?> </option>
+                    <option <?php if ($customer['city'] == $city) {
+                              echo 'selected';
+                            } ?> value="<?php echo $city; ?>"> <?php echo $city; ?> </option>
                   <?php } ?>
                 </select>
+                <div class="invalid-feedback">
+                  يرجى إدخال المنطقة
+                </div>
+              </div>
+              <div class="hidden col-sm-6" id="allCityAlt">
+                <label for="altCity" class="form-label">المنطقة</label>
+                <input type="text" class="form-control" id="altCity" name="">
+                <div class="invalid-feedback">
+                  يرجى إدخال المنطقة
+                </div>
+              </div>
 
-                <div class="invalid-feedback">
-                  يرجى إدخال المنطقة
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <label for="city" class="form-label">المنطقة</label>
-                <input name="city" type="text" class="form-control" id="address" value="">
-                <div class="invalid-feedback">
-                  يرجى إدخال المنطقة
-                </div>
-              </div>
 
               <div class="col-md-6 col-sm-12">
                 <label for="address" class="form-label">عنوان </label>
-                <input class="hidden" name="address" type="text" class="form-control" id="address" value="<?php echo $customer['address']; ?>">
+                <input name="address" type="text" class="form-control" id="address" value="<?php echo $customer['address']; ?>">
               </div>
 
 
@@ -96,7 +101,7 @@ include "init.php";
               </div>
               <div class="col-sm-6">
                 <label for="servicesType" class="form-label"> نوع الخدمة</label>
-                <select class="form-select" id="servicesType" name="servicesType">
+                <select class="form-select" id="servicesType" name="servicesType" onchange="addAlternitave(this.value, 'allServicesTypealt', 'altServicesType', 'servicesType')">
                   <option value="">اختر...</option>
                   <?php foreach ($serviceTypes as $serviceType) { ?>
                     <option value="<?php echo $serviceType ?>"><?php echo $serviceType ?></option>
@@ -106,6 +111,14 @@ include "init.php";
                   نوع الخدمة .
                 </div>
               </div>
+              <div class="hidden col-sm-6" id="allServicesTypealt">
+                <label for="altServicesType" class="form-label">نوع الخدمة</label>
+                <input type="text" class="form-control" id="altServicesType" name="">
+                <div class="invalid-feedback">
+                  يرجى إدخال نوع الخدمة
+                </div>
+              </div>
+
             </div>
 
             <hr class="my-4">
@@ -160,9 +173,5 @@ include "init.php";
 </div>
 
 
-<script src="layout/js/bootstrap.bundle.min.js"></script>
-
-<script src="layout/js/form-validation.js"></script>
-</body>
-
-</html>
+<?php require_once 'includes/templates/footer.php';
+?>
