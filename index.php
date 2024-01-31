@@ -18,12 +18,7 @@ if (isset($_GET['city']) && isset($_GET['servicesType'])) {
 
 <body>
 
-  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="./index.php">الخاطر جروب</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="عرض/إخفاء لوحة التنقل">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </header>
+  <?php require_once 'mainNavbar.php'; ?>
   <div class="container-fluid">
     <div class="row">
       <?php require_once 'navbar.php'; ?>
@@ -74,7 +69,7 @@ if (isset($_GET['city']) && isset($_GET['servicesType'])) {
                   <tr>
                     <td><?php echo $i ?></td>
                     <td>
-                      <select style="width:150px;" class="form-select" id="serviceStatus" name="serviceStatus" onchange="changeStatus(<?php echo $result['id']; ?>,this.value)">
+                      <select style="width:150px;" class="form-select" id="serviceStatus<?php echo $i; ?>" name="serviceStatus" onchange="changeStatus(serviceStatus<?php echo $i; ?>, <?php echo $result['id']; ?>,this.value)">
                         <option selected value="" disabled>اختر...</option>
                         <?php foreach ($serviceStatuses as $serviceStatus) { ?>
                           <option <?php if ($result['serviceStatus'] == $serviceStatus) {
@@ -85,7 +80,7 @@ if (isset($_GET['city']) && isset($_GET['servicesType'])) {
                     </td>
                     <td> <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a></td>
                     <td> <?php echo $result['workReqNo']; ?></td>
-                    <td> <select style="width:150px;" class="form-select" id="technician" name="technician" onchange="changetechnician(<?php echo $result['id']; ?>,this.value)">
+                    <td> <select style="width:150px;" class="form-select" id="technician<?php echo $i; ?>" name="technician" onchange="changetechnician('technician<?php echo $i; ?>',<?php echo $result['id']; ?>,this.value)">
                         <option selected value="" disabled>اختر...</option>
                         <?php foreach ($technicians as $technician) { ?>
                           <option <?php if ($result['technician'] == $technician) {

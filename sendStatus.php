@@ -8,7 +8,7 @@ if (isset($_GET['id']) & isset($_GET['serviceStatus'])) {
     $reqDate = date("Y/m/d");
 
     updateSpecific('workreq', $id, $updateCol, $serviceStatus);
-    updateSpecific('workreq', $id, "operatedDate", $reqDate);
+    updateSpecific('workreq', $id,  "operatedDate", $reqDate);
 }
 if (isset($_GET['id']) & isset($_GET['Notes'])) {
     $id = $_GET['id'];
@@ -20,7 +20,6 @@ if (isset($_GET['id']) & isset($_GET['Notes'])) {
 if (isset($_GET['id']) & isset($_GET['technician'])) {
     $id = $_GET['id'];
     $technician = $_GET['technician'];
-    echo $id, $note;
     $updateCol = "technician";
     updateSpecific('workreq', $id, $updateCol, $technician);
 }

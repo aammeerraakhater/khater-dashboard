@@ -69,9 +69,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./index.php?serviceStatus=تمت">
+                <a class="nav-link" href="./index.php?serviceStatus=تم">
                     <span data-feather="file-text"></span>
                     تمت
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?serviceStatus=استكمال">
+                    <span data-feather="file-text"></span>
+                    استكمال
                 </a>
             </li>
             <li class="nav-item">
