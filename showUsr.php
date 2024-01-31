@@ -15,106 +15,13 @@ include "init.php";
     </header>
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./index.php">
-                                <span data-feather="home"></span>
-                                كل أوامر العمل
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./allCustomers.php">
-                                <span data-feather="home"></span>
-                                كل العملاء
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?city=بنها&servicesType=تركيب">
-                                <span data-feather="shopping-cart"></span>
-                                عملاء بنها - تركيب
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?city=بنها&servicesType=صيانة">
-                                <span data-feather="users"></span>
-                                عملاء بنها - صيانة
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?city=طوخ&servicesType=تركيب">
-                                <span data-feather="bar-chart-2"></span>
-                                عملاء طوخ - تركيب
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?city=طوخ&servicesType=صيانة">
-                                <span data-feather="layers"></span>
-                                عملاء طوخ - صيانة
-                            </a>
-                        </li>
-                    </ul>
-
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>التقارير</span>
-                        <a class="link-secondary" href="#" aria-label="إضافة تقرير جديد">
-                            <span data-feather="plus-circle"></span>
-                        </a>
-                    </h6>
-
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?serviceStatus=عمل اليوم">
-                                <span data-feather="file-text"></span>
-                                عمل اليوم
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?serviceStatus=شكوى">
-                                <span data-feather="file-text"></span>
-                                شكوى
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?serviceStatus=تأجيل">
-                                <span data-feather="file-text"></span>
-                                تأجيل
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?serviceStatus=تمت">
-                                <span data-feather="file-text"></span>
-                                تمت
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?serviceStatus=مطلوب">
-                                <span data-feather="file-text"></span>
-                                مطلوب
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?serviceStatus=بالورشة">
-                                <span data-feather="file-text"></span>
-                                بالورشة
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.php?q=unpaid">
-                                <span data-feather="file-text"></span>
-                                عملاء عليهم مديونية
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <?php require_once 'navbar.php'; ?>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <?php
                 if (isset($_GET['customerID'])) {
                     $customerID = $_GET['customerID'];
-                    $results = getDataBasedID("workReq", $customerID);
-                    $customers =  getDataBasedID('customer', $customerID);
+                    $results = getBased("workReq", 'customerID', $customerID, "id");
+                    $customers = getBased('customer', 'customerID', $customerID, "customerID");
                     $customer = $customers->fetch_assoc();
 
                 ?>
@@ -146,6 +53,15 @@ include "init.php";
                                     <input type="text" class="form-control" id="name" name="name" disabled value="<?php echo $customer['delegate']; ?>">
                                 </div>
 
+                                <div class="col-md-4 col-sm-12">
+                                    <label for="name" class="form-label">المدينه </label>
+                                    <input type="text" class="form-control" id="city" name="city" disabled value="<?php echo $customer['city']; ?>">
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <label for="name" class="form-label">العنوان </label>
+                                    <input type="text" class="form-control" id="address" name="address" disabled value="<?php echo $customer['address']; ?>">
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -155,6 +71,7 @@ include "init.php";
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">عرض امر العمل</th>
                                     <th scope="col">حالة الخدمة</th>
                                     <th scope="col">أمر العمل</th>
                                     <th scope="col">التاريخ</th>
@@ -178,6 +95,7 @@ include "init.php";
                                 ?>
                                     <tr>
                                         <td><?php echo $i ?></td>
+                                        <td><a href="./showWorkReq.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">عرض </a></td>
                                         <td>
                                             <select style="width:150px;" class="form-select" id="serviceStatus" name="serviceStatus" onchange="changeStatus(<?php echo $result['id']; ?>,this.value)">
                                                 <option selected value="" disabled>اختر...</option>
