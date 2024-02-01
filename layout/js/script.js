@@ -46,3 +46,23 @@ function addAlternitave(city, id, showedEleID, showedEleName) {
 //     xmldownloadrequest.open("GET", "saveXlsx.php?q=" + q, true);
 //     xmldownloadrequest.send();
 // }
+function capture() {
+    const captureElement = document.querySelector('#capture') // Select the element you want to capture. Select the <body> element to capture full page.
+    html2canvas(captureElement)
+        .then(canvas => {
+            canvas.style.display = 'none'
+            document.body.appendChild(canvas)
+            return canvas
+        })
+        .then(canvas => {
+            const image = canvas.toDataURL('image/png')
+            const a = document.createElement('a')
+            a.setAttribute('download', 'my-image.png')
+            a.setAttribute('href', image)
+            a.click()
+            canvas.remove()
+        })
+}
+
+const btn = document.querySelector('#captureBtn')
+btn.addEventListener('click', capture)
