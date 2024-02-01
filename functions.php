@@ -31,7 +31,7 @@ function getBased($table, $column, $columnEle, $arrange)
 function getDataBasedOnCityServices($table, $city, $servicesType)
 {
     global $con;
-    $stmt = "SELECT * FROM $table WHERE city='$city' AND servicesType='$servicesType' ORDER BY id DESC";
+    $stmt = "SELECT * FROM $table WHERE city='$city' AND servicesType LIKE'%$servicesType%' ORDER BY id DESC";
     $rows = $con->query($stmt);
     return $rows;
 }

@@ -37,12 +37,6 @@
                     عملاء طوخ - فلتر
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.php?city=طوخ&servicesType=مراتب">
-                    <span data-feather="layers"></span>
-                    عملاء مراتب
-                </a>
-            </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
