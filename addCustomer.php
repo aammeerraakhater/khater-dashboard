@@ -1,4 +1,5 @@
 <?php
+$title = "اضافه عميل";
 $css = "style.css";
 include "init.php";
 ?>

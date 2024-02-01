@@ -1,6 +1,6 @@
 <?php
 
-$title = "اضافه اذن عمل ";
+$title = "تعديل اذن عمل ";
 $css = "style.css";
 include "init.php";
 ?>
