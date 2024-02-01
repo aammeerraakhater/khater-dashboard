@@ -80,7 +80,7 @@ if (isset($_GET['city']) && isset($_GET['servicesType'])) {
                     </td>
                     <td> <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a></td>
                     <td> <?php echo $result['workReqNo']; ?></td>
-                    <td> <select style="width:150px;" class="form-select" id="technician<?php echo $i; ?>" name="technician" onchange="changetechnician('technician<?php echo $i; ?>',<?php echo $result['id']; ?>,this.value)">
+                    <td> <select style="width:150px;" class="form-select" id="technician<?php echo $i; ?>" name="technician" onchange="changetechnician(technician<?php echo $i; ?>,<?php echo $result['id']; ?>,this.value)">
                         <option selected value="" disabled>اختر...</option>
                         <?php foreach ($technicians as $technician) { ?>
                           <option <?php if ($result['technician'] == $technician) {

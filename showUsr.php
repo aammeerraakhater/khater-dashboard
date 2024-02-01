@@ -39,12 +39,12 @@ include "init.php";
                                 <input type="text" class="form-control" id="name" name="name" disabled value="<?php echo $customer['usrName']; ?>">
                             </div>
                             <div class="col-md-4 col-sm-12">
-                                <label for="name" class="form-label">التليفون </label>
-                                <input type="text" class="form-control" id="name" name="name" disabled value="<?php echo $customer['phone']; ?>">
+                                <label for="phone" class="form-label">التليفون </label>
+                                <input type="text" class="form-control" id="phone" name="phone" disabled value="<?php echo $customer['phone']; ?>">
                             </div>
                             <div class="col-md-4 col-sm-12">
-                                <label for="name" class="form-label">المندوب </label>
-                                <input type="text" class="form-control" id="name" name="name" disabled value="<?php echo $customer['delegate']; ?>">
+                                <label for="delegate" class="form-label">المندوب </label>
+                                <input type="text" class="form-control" id="delegate" name="delegate" disabled value="<?php echo $customer['delegate']; ?>">
                             </div>
 
                             <div class="col-md-4 col-sm-12">
@@ -66,6 +66,7 @@ include "init.php";
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">عرض امر العمل</th>
+                                <th scope="col">تعديل امر العمل</th>
                                 <th scope="col">حالة الخدمة</th>
                                 <th scope="col">أمر العمل</th>
                                 <th scope="col">التاريخ</th>
@@ -89,9 +90,10 @@ include "init.php";
                             ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <td><a href="./showWorkReq.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">عرض </a></td>
+                                    <td><a href="./showWorkReq.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-success " tabindex="-1" role="button" aria-disabled="true">عرض </a></td>
+                                    <td><a href="./editWorkReq.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-danger " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
                                     <td>
-                                        <select style="width:150px;" class="form-select" id="serviceStatus" name="serviceStatus" onchange="changeStatus(<?php echo $result['id']; ?>,this.value)">
+                                        <select style="width:150px;" class="form-select" id="serviceStatus<?php echo $i; ?>" name="serviceStatus" onchange="changeStatus(serviceStatus<?php echo $i; ?>, <?php echo $result['id']; ?>,this.value)">
                                             <option selected value="" disabled>اختر...</option>
                                             <?php foreach ($serviceStatuses as $serviceStatus) { ?>
                                                 <option <?php if ($result['serviceStatus'] == $serviceStatus) {
@@ -103,8 +105,8 @@ include "init.php";
                                     <td> <?php echo $result['workReqNo']; ?></td>
                                     <td> <?php echo $result['reqDate']; ?></td>
                                     <td>
-                                        <select style="width:150px;" class="form-select" id="technician" name="technician" onchange="changetechnician(<?php echo $result['id']; ?>,this.value)">
-                                            <option selected value="" disabled>اختر...</option>
+                                        <select style="width:150px;" class="form-select" id="technician<?php echo $i; ?>" name="technician" onchange="changetechnician(technician<?php echo $i; ?>,<?php echo $result['id']; ?>,this.value)">
+                                            <option value="" disabled>اختر...</option>
                                             <?php foreach ($technicians as $technician) { ?>
                                                 <option <?php if ($result['technician'] == $technician) {
                                                             echo 'selected';

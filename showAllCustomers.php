@@ -50,7 +50,7 @@ $customers = getAllData("customer", "customerID");
                                 <td> <?php echo $customer['address']; ?></td>
                                 <td> <?php echo $customer['phone']; ?></td>
                                 <td> <a href="./addWorkReq.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-success " tabindex="-1" role="button" aria-disabled="true">اضافه </a></td>
-                                <td> <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
+                                <td> <a href="./editUsr.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
                             </tr>
                         <?php
                             $i++;

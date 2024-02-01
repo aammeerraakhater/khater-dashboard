@@ -34,7 +34,7 @@ if (isset($_POST["submitCustomer"]) || isset($_POST["submitCustomerWithWorkReq"]
         header("Refresh:0;url=index.php");
     }
 } {
-    if (isset($_POST["submitWorkReq"]) || isset($_POST['customerID'])) {
+    if (isset($_POST["submitWorkReq"])) {
         $customerID = $_POST['customerID']; #
         $workReqNo = $_POST['workId']; #
         $technician = $_POST['technician']; #
@@ -53,4 +53,45 @@ if (isset($_POST["submitCustomer"]) || isset($_POST["submitCustomerWithWorkReq"]
         $rows = $con->query($stmt);
         header("Refresh:0;url=index.php");
     }
+}
+if (isset($_POST["editCustomer"])) {
+    $customerID = $_POST['customerID'];
+    $usrName = $_POST['name']; #
+    $phone = $_POST['phone']; #
+    $delegate = $_POST['delegate']; #
+    $city = $_POST['city']; #
+    $address = $_POST['address']; #
+
+    $table = "customer";
+    global $con;
+    $stmt = "UPDATE $table SET usrName = '$usrName' ,phone = '$phone',delegate = '$delegate',city = '$city',address = '$address' WHERE customerID =$customerID";
+    $rows = $con->query($stmt);
+    header("Refresh:0;url=showUsr.php?customerID=$customerID");
+}
+if (isset($_POST["editWorkReq"])) {
+    $customerID = $_POST['customerID']; #
+    $id = $_POST['id']; #
+    $workReqNo = $_POST['workId']; #workId
+    $city = $_POST['city']; #
+    $address = $_POST['address']; #
+    $servicesType = $_POST['serviceTypes'];
+    $Quantity = $_POST['quantity']; #
+    $price = $_POST['price']; #
+    $paid = $_POST['paid']; #
+    $Notes = $_POST['notes'];
+
+    $table = "workReq";
+    global $con;
+    $stmt = "UPDATE $table SET 
+            workReqNo = '$workReqNo',
+            city = '$city',
+            address = '$address',
+            servicesType = '$servicesType',
+            Quantity = '$Quantity',
+            price = '$price',
+            Notes = '$Notes',
+            paid = '$paid'
+            WHERE id =$id";
+    $rows = $con->query($stmt);
+    header("Refresh:0;url=showUsr.php?customerID=$customerID");
 }

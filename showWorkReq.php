@@ -14,8 +14,8 @@ include "init.php";
     $result = $results->fetch_assoc();
 ?>
 
-    <div class="container">
-        <main id="capture">
+    <div class="container" id="capture">
+        <main>
             <div>
 
                 <div class="py-5 text-center">
