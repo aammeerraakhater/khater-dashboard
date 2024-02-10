@@ -105,7 +105,9 @@ if (isset($_SESSION['workerID'])) {
                       <td> <?php echo $result['price']; ?></td>
                       <td> <?php echo $result['paid']; ?></td>
                       <td> <?php echo $result['price'] - $result['paid']; ?></td>
-                      <td><?php echo $result['Notes']; ?></td>
+                      <td>
+                        <div style="width:300px;"><?php echo $result['Notes']; ?></div>
+                      </td>
                     </tr>
                 <?php
                     $i++;
