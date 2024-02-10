@@ -92,6 +92,13 @@
                     عملاء عليهم مديونية
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./showAllOrders.php">
+                    <span data-feather="file-text"></span>
+                    طلبات
+                </a>
+            </li>
+
         </ul>
     </div>
 </nav>

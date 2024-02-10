@@ -6,7 +6,7 @@
     <div class="form-control-dark w-100"></div>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="#">تسجيل الخروج</a>
+            <a class="nav-link px-3" href="./logOut.php">تسجيل الخروج</a>
         </div>
     </div>
 </header>

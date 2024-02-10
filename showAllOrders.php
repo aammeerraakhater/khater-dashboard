@@ -7,7 +7,7 @@ if (isset($_SESSION['workerID'])) {
     $title = " لوحة تحكم الخاطر ";
     $css = "style.css";
     include "init.php";
-    $customers = getAllData("customer", "customerID");
+    $orders = getAllData("orders", "orderID");
 ?>
 
     <?php require_once 'mainNavbar.php'; ?>
@@ -19,9 +19,6 @@ if (isset($_SESSION['workerID'])) {
                     <h1 class="h2">لوحة القيادة</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary" onclick="shareXlsx()">مشاركة</button> -->
-                            <!-- <a class="btn btn-sm btn-outline-secondary" href="./saveXlsx.php?q=customers" role="button"> مشاركة كل العملاء</a> -->
-
                         </div>
 
                         <a class="btn btn-sm btn-outline-secondary" href="./addCustomer.php" role="button"> اضافه عميل</a>
@@ -29,33 +26,35 @@ if (isset($_SESSION['workerID'])) {
                 </div>
                 <h2> كل العملاء </h2>
                 <div class="table-responsive">
-                    <table id="customersTable" class="table align-middle table-striped">
+                    <table class="table align-middle table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <!-- <th scope="col">تمت</th> -->
                                 <th scope="col">الاسم</th>
-                                <th scope="col">المندوب</th>
-                                <th scope="col">المدينه</th>
-                                <th scope="col">العنوان</th>
-                                <th scope="col">الموبايل</th>
-                                <th scope="col">اضافه امر عمل</th>
-                                <th scope="col">تعديل بيانات العميل</th>
+                                <th scope="col">رقم امر العمل</th>
+                                <th scope="col">الكميه</th>
+                                <th scope="col">الطلبات</th>
+                                <!-- <th scope="col">تعديل بيانات </th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $i = 1;
-                            foreach ($customers as $customer) {
+                            foreach ($orders as $order) {
+                                $workReqs =  getBased('workreq', 'id', $order['workReqID'], 'customerID');
+                                $workReq = $workReqs->fetch_assoc();
+                                $customers = getBased('customer', 'customerID', $workReq['customerID'], 'customerID');
+                                $customer =  $customers->fetch_assoc();
                             ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <td><a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a></td>
-                                    <td> <?php echo $customer['delegate']; ?></td>
-                                    <td> <?php echo $customer['city']; ?></td>
-                                    <td> <?php echo $customer['address']; ?></td>
-                                    <td> <?php echo $customer['phone']; ?></td>
-                                    <td> <a href="./addWorkReq.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-success " tabindex="-1" role="button" aria-disabled="true">اضافه </a></td>
-                                    <td> <a href="./editUsr.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
+                                    <!-- <td><input type="checkbox" id="order<?php echo $i; ?>"></td> -->
+                                    <td> <?php echo $customer['usrName']; ?></td>
+                                    <td> <?php echo $workReq['workReqNo']; ?></td>
+                                    <td> <?php echo $order['quantity']; ?></td>
+                                    <td> <?php echo $order['Required']; ?></td>
+                                    <!-- <td> <a href="./editUsr.php?orderID=<?php echo $order['orderID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td> -->
                                 </tr>
                             <?php
                                 $i++;

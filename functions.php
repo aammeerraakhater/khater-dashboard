@@ -51,3 +51,32 @@ function updateSpecific($table, $id, $updatedCol, $updatedEle)
     $rows = $con->query($stmt);
     return $rows;
 }
+function  checkUser($table, $email, $password)
+{
+    global $con;
+    $stmt = "SELECT * FROM $table WHERE workerEmail = '$email'";
+    $rows = $con->query($stmt);
+    $row = $rows->fetch_assoc();
+    if (isset($row['workerEmail']) && $row['workerEmail'] == $email) {
+
+        if ($row['workerPass'] == $password) {
+            $_SESSION['workerID'] = $row['workerID'];
+            $_SESSION['workerEmail '] = $row['workerEmail'];
+            $_SESSION['wName'] = $row['wName'];
+            $_SESSION['isAdmin'] = $row['isAdmin'];
+            $_SESSION['msg'] = ' اهلا ' . $_SESSION['wName'][0];
+            echo " اهلا ";
+            echo $_SESSION['wName'];
+            header("Refresh:0;url=./index.php");
+        } else {
+            echo '
+              باسورد خاطئ
+          ';
+            $_SESSION['msg'] = ' باسورد خاطئ';
+        }
+    } else {
+        echo '
+            الادمن غير مسجل    
+        ';
+    }
+}
