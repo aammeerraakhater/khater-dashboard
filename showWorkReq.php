@@ -102,7 +102,7 @@ if (isset($_SESSION['workerID'])) {
                 </div>
             <?php } ?>
             </main>
-            <button class="w-100 btn btn-primary btn-lg" id="captureBtn"> حفظ صوره </button>
+            <button class="w-100 btn btn-primary btn-lg" id="captureBtn" onclick="capture()"> حفظ صوره </button>
             <hr class="my-4">
 
         </div>

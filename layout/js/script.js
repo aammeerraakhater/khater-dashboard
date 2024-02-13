@@ -28,6 +28,20 @@ function changetechnician(elementID, id, technician) {
     xmlhttp.open("GET", "sendStatus.php?id=" + id + "&technician=" + technician, true);
     xmlhttp.send();
 }
+function confirmOrder(elementID, id) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+
+    };
+    if (document.getElementById(elementID).checked) {
+        state = 1;
+    } else {
+        state = 0;
+    }
+    xmlhttp.open("GET", "sendStatus.php?orderID=" + id + "&state=" + state, true);
+    xmlhttp.send();
+
+}
 function addAlternitave(city, id, showedEleID, showedEleName) {
     var element = document.getElementById(id);
     if (city == 'أخرى') {
@@ -64,5 +78,5 @@ function capture() {
         })
 }
 
-const btn = document.querySelector('#captureBtn')
-btn.addEventListener('click', capture)
+// const btn = document.getElementById('captureBtn')
+// btn.addEventListener('click', capture)

@@ -23,3 +23,9 @@ if (isset($_GET['id']) & isset($_GET['technician'])) {
     $updateCol = "technician";
     updateSpecific('workreq', $id, $updateCol, $technician);
 }
+if (isset($_GET['orderID'])) {
+    $id = $_GET['orderID'];
+    $state = $_GET['state'];
+    $updateCol = "isDone";
+    updateSpecific('orders', $id, $updateCol, $state, 'orderID');
+}

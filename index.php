@@ -31,14 +31,26 @@ if (isset($_SESSION['workerID'])) {
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">لوحة القيادة</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group me-2">
-                <!-- <button type="button" class="btn btn-sm btn-outline-secondary" onclick="shareXlsx('workReq')">مشاركة</button> -->
-                <a class="btn btn-sm btn-outline-secondary" href="./saveXlsx.php?q=workReq" role="button"> مشاركة أوامر العمل</a>
+              <?php if (isset($_SESSION['isAdmin']) && ($_SESSION['isAdmin']) == 1) { ?>
+                <div class="btn-group me-2">
+                  <a class="btn btn-sm btn-outline-secondary" href="./saveXlsx.php?q=workReq" role="button"> مشاركة أوامر العمل</a>
+                </div><?php } ?>
+              <div class="dropdown mx-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  فلتر للعملاء
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="./index.php?city=بنها&servicesType=تكييف"> عملاء بنها - تكييف</a></li>
+                  <li><a class="dropdown-item" href="./index.php?city=بنها&servicesType=فلتر"> عملاء بنها - فلتر </a></li>
+                  <li><a class="dropdown-item" href="./index.php?city=طوخ&servicesType=تكييف"> عملاء طوخ - تكييف </a></li>
+                  <li><a class="dropdown-item" href="./index.php?city=طوخ&servicesType=فلتر"> عملاء طوخ - فلتر </a></li>
+                </ul>
               </div>
               <a class="btn btn-sm btn-outline-secondary" href="./addCustomer.php" role="button"> اضافه عميل</a>
             </div>
           </div>
-          <h2> كل العملاء </h2>
+
+          <h2> كل أوامر العمل </h2>
           <div class="table-responsive">
             <table id="example" class="table align-middle table-striped">
               <thead>
@@ -74,7 +86,7 @@ if (isset($_SESSION['workerID'])) {
                     <tr>
                       <td><?php echo $i ?></td>
                       <td>
-                        <select style="width:150px;" class="form-select" id="serviceStatus<?php echo $i; ?>" name="serviceStatus" onchange="changeStatus(serviceStatus<?php echo $i; ?>, <?php echo $result['id']; ?>,this.value)">
+                        <select style="width:115px;" class="form-select" id="serviceStatus<?php echo $i; ?>" name="serviceStatus" onchange="changeStatus(serviceStatus<?php echo $i; ?>, <?php echo $result['id']; ?>,this.value)">
                           <option selected value="" disabled>اختر...</option>
                           <?php foreach ($serviceStatuses as $serviceStatus) { ?>
                             <option <?php if ($result['serviceStatus'] == $serviceStatus) {
@@ -117,7 +129,6 @@ if (isset($_SESSION['workerID'])) {
             </table>
           </div>
           <hr class="my-4">
-
         </main>
       </div>
     </div>

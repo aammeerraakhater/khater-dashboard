@@ -2,7 +2,7 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./index.php">
+                <a class="nav-link " aria-current="page" href="./index.php">
                     <span data-feather="home"></span>
                     كل أوامر العمل
                 </a>
@@ -11,30 +11,6 @@
                 <a class="nav-link " aria-current="page" href="./showAllCustomers.php">
                     <span data-feather="home"></span>
                     كل العملاء
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.php?city=بنها&servicesType=تكييف">
-                    <span data-feather="shopping-cart"></span>
-                    عملاء بنها - تكييف
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.php?city=بنها&servicesType=فلتر">
-                    <span data-feather="users"></span>
-                    عملاء بنها - فلتر
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.php?city=طوخ&servicesType=تكييف">
-                    <span data-feather="bar-chart-2"></span>
-                    عملاء طوخ - تكييف
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.php?city=طوخ&servicesType=فلتر">
-                    <span data-feather="layers"></span>
-                    عملاء طوخ - فلتر
                 </a>
             </li>
         </ul>
@@ -96,6 +72,12 @@
                 <a class="nav-link" href="./showAllOrders.php">
                     <span data-feather="file-text"></span>
                     طلبات
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./showAllOrders.php?q=1">
+                    <span data-feather="file-text"></span>
+                    طلبات تمت
                 </a>
             </li>
 

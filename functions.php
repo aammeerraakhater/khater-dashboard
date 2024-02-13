@@ -44,10 +44,10 @@ function getDataBasedMoney($table)
     return $rows;
 }
 
-function updateSpecific($table, $id, $updatedCol, $updatedEle)
+function updateSpecific($table, $id, $updatedCol, $updatedEle, $idColName = 'id')
 {
     global $con;
-    $stmt = "UPDATE $table SET $updatedCol='$updatedEle' WHERE id='$id'";
+    $stmt = "UPDATE $table SET $updatedCol='$updatedEle' WHERE $idColName='$id'";
     $rows = $con->query($stmt);
     return $rows;
 }
@@ -64,19 +64,12 @@ function  checkUser($table, $email, $password)
             $_SESSION['workerEmail '] = $row['workerEmail'];
             $_SESSION['wName'] = $row['wName'];
             $_SESSION['isAdmin'] = $row['isAdmin'];
-            $_SESSION['msg'] = ' اهلا ' . $_SESSION['wName'][0];
-            echo " اهلا ";
-            echo $_SESSION['wName'];
+            $_SESSION['msg'] = ' اهلا ' . $_SESSION['wName'];
             header("Refresh:0;url=./index.php");
         } else {
-            echo '
-              باسورد خاطئ
-          ';
             $_SESSION['msg'] = ' باسورد خاطئ';
         }
     } else {
-        echo '
-            الادمن غير مسجل    
-        ';
+        $_SESSION['msg'] = ' الادمن غير مسجل  ';
     }
 }

@@ -7,7 +7,11 @@ if (isset($_SESSION['workerID'])) {
     $title = " لوحة تحكم الخاطر ";
     $css = "style.css";
     include "init.php";
-    $orders = getAllData("orders", "orderID");
+    $state = 0;
+    if (isset($_GET['q'])) {
+        $state = 1;
+    }
+    $orders = getBased("orders", "isDone", $state, "orderID");
 ?>
 
     <?php require_once 'mainNavbar.php'; ?>
@@ -30,12 +34,12 @@ if (isset($_SESSION['workerID'])) {
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <!-- <th scope="col">تمت</th> -->
+                                <th scope="col">تعديل بيانات </th>
+                                <th scope="col">تمت</th>
                                 <th scope="col">الاسم</th>
                                 <th scope="col">رقم امر العمل</th>
                                 <th scope="col">الكميه</th>
                                 <th scope="col">الطلبات</th>
-                                <!-- <th scope="col">تعديل بيانات </th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -49,12 +53,14 @@ if (isset($_SESSION['workerID'])) {
                             ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <!-- <td><input type="checkbox" id="order<?php echo $i; ?>"></td> -->
+                                    <td> <a href="./editOrder.php?orderID=<?php echo $order['orderID']; ?>&customerID=<?php echo $workReq['customerID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
+                                    <td><input type="checkbox" id="order<?php echo $i; ?>" <?php if ($order['isDone']) {
+                                                                                                echo 'checked';
+                                                                                            } ?> onclick="confirmOrder('order<?php echo $i; ?>',<?php echo $order['orderID']; ?>)"></td>
                                     <td> <?php echo $customer['usrName']; ?></td>
                                     <td> <?php echo $workReq['workReqNo']; ?></td>
                                     <td> <?php echo $order['quantity']; ?></td>
                                     <td> <?php echo $order['Required']; ?></td>
-                                    <!-- <td> <a href="./editUsr.php?orderID=<?php echo $order['orderID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td> -->
                                 </tr>
                             <?php
                                 $i++;

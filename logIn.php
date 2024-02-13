@@ -18,6 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["email"]) && !empty($_
     <div class="containerimg">
     </div>
     <div class="formcontainer">
+        <?php if (isset($_SESSION['msg'])) { ?>
+            <div style="color:red;"><?php echo $_SESSION['msg']; ?></div><?php } ?>
         <form action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST">
             <div class="form-group ">
                 <label for="exampleInputEmail1">الايميل</label>

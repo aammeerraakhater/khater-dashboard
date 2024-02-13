@@ -79,6 +79,7 @@ if (isset($_POST["editWorkReq"])) {
     $price = $_POST['price']; #
     $paid = $_POST['paid']; #
     $Notes = $_POST['notes'];
+    $happyCall = $_POST['happyCall'];
     $editedBy = $_POST['editedBy'];
 
     $table = "workReq";
@@ -92,6 +93,7 @@ if (isset($_POST["editWorkReq"])) {
             price = '$price',
             Notes = '$Notes',
             paid = '$paid',
+            happyCall = '$happyCall',
             editedBy = '$editedBy'
             WHERE id =$id";
     $rows = $con->query($stmt);
@@ -106,6 +108,16 @@ if (isset($_POST["addOrderRequest"])) {
     $table = "orders";
     global $con;
     $stmt = "INSERT INTO $table(workReqID,quantity,Required, reqDate) VALUES('$workReqID','$quantity','$order','$reqDate')";
+    $rows = $con->query($stmt);
+    header("Refresh:0;url=index.php");
+}
+if (isset($_POST["EditOrderRequest"])) {
+    $order = $_POST['order']; #
+    $quantity = $_POST['quantity']; #
+    $orderID = $_POST['id'];
+    $table = "orders";
+    global $con;
+    $stmt = "UPDATE $table SET quantity = '$quantity',Required='$order' WHERE orderID = '$orderID'";
     $rows = $con->query($stmt);
     header("Refresh:0;url=index.php");
 }

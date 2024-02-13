@@ -27,9 +27,10 @@ if (isset($_SESSION['workerID'])) {
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">لوحة القيادة</h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
-                            <div class="btn-group me-2">
-                                <button disabled type="button" class="btn btn-sm btn-outline-secondary">مشاركة</button>
-                            </div>
+                            <?php if (isset($_SESSION['isAdmin']) && ($_SESSION['isAdmin']) == 1) { ?>
+                                <div class="btn-group me-2">
+                                    <button disabled type="button" class="btn btn-sm btn-outline-secondary">مشاركة</button>
+                                </div><?php } ?>
                             <a class="btn btn-sm btn-outline-secondary" href="./addWorkReq.php?customerID=<?php echo $customerID; ?>" role="button"> اضافه أمر عمل</a>
                         </div>
                     </div>
@@ -41,24 +42,24 @@ if (isset($_SESSION['workerID'])) {
                             <div class="row g-3">
                                 <div class="col-md-4 col-sm-12">
                                     <label for="name" class="form-label">الاسم </label>
-                                    <input type="text" class="form-control" id="name" name="name" disabled value="<?php echo $customer['usrName']; ?>">
+                                    <div class="form-control" id="name" name="name"><?php echo $customer['usrName']; ?></div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <label for="phone" class="form-label">التليفون </label>
-                                    <input type="text" class="form-control" id="phone" name="phone" disabled value="<?php echo $customer['phone']; ?>">
+                                    <div class="form-control" id="phone" name="phone"><?php echo $customer['phone']; ?></div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <label for="delegate" class="form-label">المندوب </label>
-                                    <input type="text" class="form-control" id="delegate" name="delegate" disabled value="<?php echo $customer['delegate']; ?>">
+                                    <div class="form-control" id="delegate" name="delegate"><?php echo $customer['delegate']; ?></div>
                                 </div>
 
                                 <div class="col-md-4 col-sm-12">
                                     <label for="name" class="form-label">المدينه </label>
-                                    <input type="text" class="form-control" id="city" name="city" disabled value="<?php echo $customer['city']; ?>">
+                                    <div class="form-control" id="city" name="city"><?php echo $customer['city']; ?></div>
                                 </div>
                                 <div class="col-md-8 col-sm-12">
                                     <label for="name" class="form-label">العنوان </label>
-                                    <input type="text" class="form-control" id="address" name="address" disabled value="<?php echo $customer['address']; ?>">
+                                    <div class="form-control" id="address" name="address"><?php echo $customer['address']; ?></div>
                                 </div>
 
                             </div>
@@ -85,6 +86,7 @@ if (isset($_SESSION['workerID'])) {
                                     <th scope="col">المدفوع </th>
                                     <th scope="col">الباقي </th>
                                     <th scope="col">الملاحظات </th> <!-- 16 -->
+                                    <th scope="col">Happy call </th> <!-- 16 -->
                                     <th scope="col">اخر تعديل </th> <!-- 16 -->
                                 </tr>
                             </thead>
@@ -98,10 +100,10 @@ if (isset($_SESSION['workerID'])) {
                                     <tr>
                                         <td><?php echo $i ?></td>
                                         <td><a href="./showWorkReq.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-success " tabindex="-1" role="button" aria-disabled="true">عرض </a></td>
-                                        <td><a href="./addOrder.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">عرض </a></td>
+                                        <td><a href="./addOrder.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">اضافه </a></td>
                                         <td><a href="./editWorkReq.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-danger " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
                                         <td>
-                                            <select style="width:150px;" class="form-select" id="serviceStatus<?php echo $i; ?>" name="serviceStatus" onchange="changeStatus(serviceStatus<?php echo $i; ?>, <?php echo $result['id']; ?>,this.value)">
+                                            <select style="width:100px;" class="form-select" id="serviceStatus<?php echo $i; ?>" name="serviceStatus" onchange="changeStatus(serviceStatus<?php echo $i; ?>, <?php echo $result['id']; ?>,this.value)">
                                                 <option selected value="" disabled>اختر...</option>
                                                 <?php foreach ($serviceStatuses as $serviceStatus) { ?>
                                                     <option <?php if ($result['serviceStatus'] == $serviceStatus) {
@@ -123,13 +125,20 @@ if (isset($_SESSION['workerID'])) {
                                             </select>
                                         </td>
                                         <td> <?php echo $result['city']; ?></td>
-                                        <td> <?php echo $result['address']; ?></td>
+                                        <td>
+                                            <div style="width:150px;"> <?php echo $result['address']; ?></div>
+                                        </td>
                                         <td> <?php echo $result['servicesType']; ?></td>
                                         <td> <?php echo $result['Quantity']; ?></td>
                                         <td> <?php echo $result['price']; ?></td>
                                         <td> <?php echo $result['paid']; ?></td>
                                         <td> <?php echo $result['price'] - $result['paid']; ?></td>
-                                        <td><?php echo $result['Notes']; ?></td>
+                                        <td>
+                                            <div style="width:300px;"><?php echo $result['Notes']; ?></div>
+                                        </td>
+                                        <td>
+                                            <div style="width:300px;"><?php echo $result['happyCall']; ?></div>
+                                        </td>
                                         <td><?php echo $result['editedBy']; ?></td>
                                     </tr>
                                 <?php
