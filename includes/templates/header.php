@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="el khater dashboard">
     <title><?php echo $title ?></title>
+    <!-- <link rel="icon" type="image/png" sizes="500*500" href="./img/logo-alkhater.png" />
+ -->
     <!-- Bootstrap core CSS -->
     <!-- Data Table CSS -->
     <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
@@ -14,7 +16,6 @@
     <link href="<?php echo $cssPath ?>bootstrap.rtl.min.css" rel="stylesheet">
     <link href="<?php echo $cssPath ?>dashboard.rtl.css" rel="stylesheet">
     <link href="<?php echo $cssPath . $css ?>" rel="stylesheet">
-
 </head>
 
 <body>
