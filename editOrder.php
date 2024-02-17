@@ -30,10 +30,19 @@ if (isset($_SESSION['workerID'])) {
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label for="name" class="form-label">الاسم </label>
-                                    <input type="text" class="form-control" id="name" name="name" disabled value="<?php echo $customer['usrName']; ?>">
-                                    <div class="invalid-feedback">
-                                        يرجى إدخال اسم صحيح.
-                                    </div>
+                                    <div class="form-control"><?php echo $customer['usrName']; ?></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="phone" class="form-label">رقم التليفون </label>
+                                    <div class="form-control"><?php echo $customer['phone']; ?></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="name" class="form-label">المدينه </label>
+                                    <div class="form-control"><?php echo $customer['city']; ?></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="name" class="form-label">العنوان </label>
+                                    <div class="form-control"><?php echo $customer['address']; ?></div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="quantity" class="form-label">الكمية</label>
@@ -42,25 +51,40 @@ if (isset($_SESSION['workerID'])) {
                                         الكمية
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label">السعر</label>
+                                    <input type="text" class="form-control" id="price" name="price" required value="<?php echo $order['price']; ?>">
+                                    <div class="invalid-feedback">
+                                        برجاء ادخل السعر
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="paid" class="form-label">المدفوع</label>
+                                    <input type="text" class="form-control" id="paid" name="paid" value="<?php echo $order['paid']; ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="serviceType" class="form-label">نوع الخدمه</label>
+                                    <input type="text" class="form-control" id="serviceType" name="serviceType" value="<?php echo $order['serviceType']; ?>">
+                                </div>
 
                                 <div class="hidden">
                                     <input type="text" class="form-control" id="id" name="id" value="<?php echo  $order['orderID']; ?>">
                                 </div>
+                                <hr class="my-4">
+                                <div class="col-12">
+                                    <label for="order" class="form-label">الطلبات</label>
+                                    <input name="order" type="text" class="form-control" id="order" value="<?php echo $order['Required']; ?>">
+                                </div>
+                                <div class="col-12">
+                                    <label for="note" class="form-label">التواصل /الملاحظات</label>
+                                    <input name="note" type="text" class="form-control" id="note" value="<?php echo $order['addNotes']; ?>">
+                                </div>
+
+                                <hr class="my-4">
+
+                                <button class="w-100 btn btn-primary btn-lg" name="EditOrderRequest" type="submit">حفظ</button>
+                                <hr class="my-4">
                             </div>
-
-
-
-
-                            <hr class="my-4">
-                            <div class="col-12">
-                                <label for="order" class="form-label">الطلبات</label>
-                                <input name="order" type="text" class="form-control" id="order" value="<?php echo $order['Required']; ?>">
-                            </div>
-                            <hr class="my-4">
-
-                            <button class="w-100 btn btn-primary btn-lg" name="EditOrderRequest" type="submit">حفظ</button>
-                            <hr class="my-4">
-
                         </form>
                     </div>
                 </div>

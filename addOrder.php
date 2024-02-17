@@ -34,6 +34,20 @@ if (isset($_SESSION['workerID'])) {
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <label for="personOrdered" class="form-label">الطالب</label>
+                                    <input type="text" class="form-control" id="personOrdered" name="personOrdered" value="<?php echo $_SESSION['wName']; ?>" required>
+                                    <div class="invalid-feedback">
+                                        برجاء ادخل الطالب
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="orderedFrom" class="form-label">مطلوب من</label>
+                                    <input type="text" class="form-control" id="orderedFrom" name="orderedFrom" required>
+                                    <div class="invalid-feedback">
+                                        برجاء ادخل السعر
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                     <label for="quantity" class="form-label">الكمية</label>
                                     <input type="text" class="form-control" id="quantity" name="quantity" required>
                                     <div class="invalid-feedback">
@@ -41,23 +55,40 @@ if (isset($_SESSION['workerID'])) {
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label">السعر</label>
+                                    <input type="text" class="form-control" id="price" name="price" required>
+                                    <div class="invalid-feedback">
+                                        برجاء ادخل السعر
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="paid" class="form-label">المدفوع</label>
+                                    <input type="text" class="form-control" id="paid" name="paid">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="serviceType" class="form-label">نوع الخدمه</label>
+                                    <input type="text" class="form-control" id="serviceType" name="serviceType">
+                                </div>
+
                                 <div class="hidden">
                                     <input type="text" class="form-control" id="id" name="id" value="<?php echo  $_GET['id']; ?>">
                                 </div>
+                                <hr class="my-4">
+                                <div class="col-12">
+                                    <label for="order" class="form-label">الطلبات</label>
+                                    <input name="order" type="text" class="form-control" id="order">
+                                </div>
+                                <div class="col-12">
+                                    <label for="note" class="form-label">التواصل /الملاحظات</label>
+                                    <input name="note" type="text" class="form-control" id="note">
+                                </div>
+                                <hr class="my-4">
+
+                                <button class="w-100 btn btn-primary btn-lg" name="addOrderRequest" type="submit">حفظ</button>
+                                <hr class="my-4">
+
                             </div>
-
-
-
-
-                            <hr class="my-4">
-                            <div class="col-12">
-                                <label for="order" class="form-label">الطلبات</label>
-                                <input name="order" type="text" class="form-control" id="order">
-                            </div>
-                            <hr class="my-4">
-
-                            <button class="w-100 btn btn-primary btn-lg" name="addOrderRequest" type="submit">حفظ</button>
-                            <hr class="my-4">
 
                         </form>
                     </div>

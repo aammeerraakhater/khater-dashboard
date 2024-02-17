@@ -103,11 +103,18 @@ if (isset($_POST["addOrderRequest"])) {
     $order = $_POST['order']; #
     $quantity = $_POST['quantity']; #
     $workReqID = $_POST['id'];
+    $price = $_POST['price']; #
+    $paid = $_POST['paid']; #
+    $serviceType = $_POST['serviceType'];
+    $note = $_POST['note']; #
+    $personOrdered = $_POST['personOrdered'];
+    $orderedFrom = $_POST['orderedFrom']; #
+
     $reqDate = date("Y/m/d");
 
     $table = "orders";
     global $con;
-    $stmt = "INSERT INTO $table(workReqID,quantity,Required, reqDate) VALUES('$workReqID','$quantity','$order','$reqDate')";
+    $stmt = "INSERT INTO $table(workReqID,quantity,Required, reqDate,price,paid,serviceType, addNotes, personOrdered,orderedFrom ) VALUES('$workReqID','$quantity','$order','$reqDate','$price','$paid','$serviceType','$note','$personOrdered','$orderedFrom')";
     $rows = $con->query($stmt);
     header("Refresh:0;url=index.php");
 }
@@ -115,9 +122,14 @@ if (isset($_POST["EditOrderRequest"])) {
     $order = $_POST['order']; #
     $quantity = $_POST['quantity']; #
     $orderID = $_POST['id'];
+    $price = $_POST['price']; #
+    $paid = $_POST['paid']; #
+    $serviceType = $_POST['serviceType'];
+    $note = $_POST['note']; #
+
     $table = "orders";
     global $con;
-    $stmt = "UPDATE $table SET quantity = '$quantity',Required='$order' WHERE orderID = '$orderID'";
+    $stmt = "UPDATE $table SET quantity = '$quantity',Required='$order',price='$price',paid='$paid',serviceType='$serviceType',addNotes='$note' WHERE orderID = '$orderID'";
     $rows = $con->query($stmt);
     header("Refresh:0;url=index.php");
 }

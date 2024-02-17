@@ -28,18 +28,31 @@ if (isset($_SESSION['workerID'])) {
                         <a class="btn btn-sm btn-outline-secondary" href="./addCustomer.php" role="button"> اضافه عميل</a>
                     </div>
                 </div>
-                <h2> كل العملاء </h2>
+                <h2> كل الطلبات </h2>
                 <div class="table-responsive">
-                    <table class="table align-middle table-striped">
+                    <table id="ordersTable" class="table align-middle table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">تعديل بيانات </th>
-                                <th scope="col">تمت</th>
+                                <th scope="col">حاله الطلب</th>
                                 <th scope="col">الاسم</th>
+                                <th scope="col">رفم التليفون</th>
                                 <th scope="col">رقم امر العمل</th>
+                                <?php if ($state) { ?>
+                                    <th scope="col">تاريخ تمام الطلب</th>
+                                <?php } else { ?><th scope="col">تاريخ الطلب</th>
+                                <?php } ?>
                                 <th scope="col">الكميه</th>
+                                <th scope="col">السعر</th>
+                                <th scope="col">المدفوع</th>
+                                <th scope="col">الباقي</th>
                                 <th scope="col">الطلبات</th>
+                                <th scope="col">ملاحظات</th>
+                                <th scope="col">العنوان</th>
+                                <th scope="col">المدينه</th>
+                                <th scope="col">الطالب</th>
+                                <th scope="col">المطلوب منه</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,9 +71,27 @@ if (isset($_SESSION['workerID'])) {
                                                                                                 echo 'checked';
                                                                                             } ?> onclick="confirmOrder('order<?php echo $i; ?>',<?php echo $order['orderID']; ?>)"></td>
                                     <td> <?php echo $customer['usrName']; ?></td>
+                                    <td> <?php echo $customer['phone']; ?></td>
                                     <td> <?php echo $workReq['workReqNo']; ?></td>
+                                    <?php if ($state) { ?>
+                                        <td><?php echo $order['doneDate']; ?> </td>
+                                    <?php } else { ?><td><?php echo $order['reqDate']; ?> </td>
+                                    <?php } ?>
+
                                     <td> <?php echo $order['quantity']; ?></td>
-                                    <td> <?php echo $order['Required']; ?></td>
+                                    <td> <?php echo $order['price']; ?></td>
+                                    <td> <?php echo $order['paid']; ?></td>
+                                    <td> <?php echo $order['price'] - $order['paid']; ?></td>
+                                    <td>
+                                        <div style="width:150px"><?php echo $order['Required']; ?></div>
+                                    </td>
+                                    <td>
+                                        <div style="width:150px"><?php echo $order['addNotes']; ?></div>
+                                    </td>
+                                    <td> <?php echo $workReq['city']; ?></td>
+                                    <td> <?php echo $workReq['address']; ?></td>
+                                    <td> <?php echo $order['personOrdered']; ?></td>
+                                    <td> <?php echo $order['orderedFrom']; ?></td>
                                 </tr>
                             <?php
                                 $i++;

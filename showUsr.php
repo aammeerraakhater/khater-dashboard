@@ -65,8 +65,9 @@ if (isset($_SESSION['workerID'])) {
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <div class="table-responsive">
-
+                        <h3>كل اوامر العمل</h3>
                         <table class="table align-middle table-striped">
                             <thead>
                                 <tr>
@@ -146,6 +147,7 @@ if (isset($_SESSION['workerID'])) {
                                 } ?>
                             </tbody>
                         </table>
+                        <hr>
                     </div>
                     <hr class="my-4">
                 <?php } else { ?>

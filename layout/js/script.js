@@ -78,5 +78,3 @@ function capture() {
         })
 }
 
-// const btn = document.getElementById('captureBtn')
-// btn.addEventListener('click', capture)
