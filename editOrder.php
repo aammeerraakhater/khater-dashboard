@@ -12,7 +12,7 @@ if (isset($_SESSION['workerID'])) {
     <div class="container">
         <main>
             <div class="py-5 text-center">
-                <h2>طلب شراء جديد</h2>
+                <h2> طلب شراء تعديل </h2>
             </div>
             <?php if (isset($_GET['orderID']) && isset($_GET['customerID'])) {
                 $customerID = $_GET['customerID'];
@@ -75,9 +75,17 @@ if (isset($_SESSION['workerID'])) {
                                     <label for="order" class="form-label">الطلبات</label>
                                     <input name="order" type="text" class="form-control" id="order" value="<?php echo $order['Required']; ?>">
                                 </div>
+                                <div class="col-12 hidden">
+                                    <label for="oldOrder" class="form-label">الطلبات</label>
+                                    <input name="oldOrder" type="text" class="form-control" id="oldOrder" value="<?php echo $order['Required']; ?>">
+                                </div>
                                 <div class="col-12">
                                     <label for="note" class="form-label">التواصل /الملاحظات</label>
                                     <input name="note" type="text" class="form-control" id="note" value="<?php echo $order['addNotes']; ?>">
+                                </div>
+                                <div class="col-12 hidden">
+                                    <label for="oldNote" class="form-label">التواصل /الملاحظات</label>
+                                    <input name="oldNote" type="text" class="form-control" id="oldNote" value="<?php echo $order['addNotes']; ?>">
                                 </div>
 
                                 <hr class="my-4">

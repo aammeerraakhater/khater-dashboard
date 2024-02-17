@@ -137,6 +137,14 @@ if (isset($_SESSION['workerID'])) {
                                     <label for="notes" class="form-label">Happy call</label>
                                     <input type="text" class="form-control" id="happyCall" name="happyCall" placeholder="" value="<?php echo $result['happyCall']; ?>">
                                 </div>
+                                <div class="col-12 hidden">
+                                    <label for="oldNotes" class="form-label">ملاحظات</label>
+                                    <input type="text" class="form-control" id="oldNotes" name="oldNotes" placeholder="" value="<?php echo $result['Notes']; ?>">
+                                </div>
+                                <div class="col-12 hidden">
+                                    <label for="oldHappyCall" class="form-label">Happy call</label>
+                                    <input type="text" class="form-control" id="oldHappyCall" name="oldHappyCall" placeholder="" value="<?php echo $result['happyCall']; ?>">
+                                </div>
                             </div>
                             <hr class=" my-4">
 

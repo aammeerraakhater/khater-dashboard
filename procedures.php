@@ -1,5 +1,7 @@
 <?php
 include "init.php";
+session_start();
+
 if (isset($_POST["submitCustomer"]) || isset($_POST["submitCustomerWithWorkReq"])) {
     $usrName = $_POST['name']; #
     $phone = $_POST['phone']; #
@@ -78,9 +80,19 @@ if (isset($_POST["editWorkReq"])) {
     $Quantity = $_POST['quantity']; #
     $price = $_POST['price']; #
     $paid = $_POST['paid']; #
-    $Notes = $_POST['notes'];
-    $happyCall = $_POST['happyCall'];
-    $editedBy = $_POST['editedBy'];
+    $oldNotes = $_POST['oldNotes']; #
+    if ($_POST['oldNotes'] == $_POST['notes']) {
+        $Notes = $_POST['notes'];
+    } else {
+        $Notes = $_POST['notes'] . " " . date("ha") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
+    }
+    $oldHappyCall = $_POST['oldHappyCall']; #
+    if ($_POST['oldHappyCall'] == $_POST['happyCall']) {
+        $happyCall = $_POST['happyCall'];
+    } else {
+        $happyCall = $_POST['happyCall'] . " " . date("ha") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
+    }
+    $editedBy =   $_POST['editedBy'];
 
     $table = "workReq";
     global $con;
@@ -119,17 +131,27 @@ if (isset($_POST["addOrderRequest"])) {
     header("Refresh:0;url=index.php");
 }
 if (isset($_POST["EditOrderRequest"])) {
-    $order = $_POST['order']; #
+    $oldOrder = $_POST['oldOrder']; #
+    if ($_POST['oldOrder'] == $_POST['order']) {
+        $order = $_POST['order'];
+    } else {
+        $order = $_POST['order'] . " " . date("ha") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
+    }
+    $oldnote = $_POST['oldNote']; #
+    if ($_POST['oldNote'] == $_POST['note']) {
+        $note = $_POST['note'];
+    } else {
+        $note = $_POST['note'] . " " . date("ha") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
+    }
     $quantity = $_POST['quantity']; #
     $orderID = $_POST['id'];
     $price = $_POST['price']; #
     $paid = $_POST['paid']; #
     $serviceType = $_POST['serviceType'];
-    $note = $_POST['note']; #
 
     $table = "orders";
     global $con;
     $stmt = "UPDATE $table SET quantity = '$quantity',Required='$order',price='$price',paid='$paid',serviceType='$serviceType',addNotes='$note' WHERE orderID = '$orderID'";
     $rows = $con->query($stmt);
-    header("Refresh:0;url=index.php");
+    header("Refresh:0;url=showAllOrders.php");
 }
