@@ -47,11 +47,12 @@ if (isset($_POST["submitCustomer"]) || isset($_POST["submitCustomerWithWorkReq"]
         $price = $_POST['price']; #
         $paid = $_POST['paid']; #
         $Notes = $_POST['notes'];
+        $delegate = $_POST['delegate'];
         $reqDate = date("Y/m/d");
 
         $table = "workreq";
         global $con;
-        $stmt = "INSERT INTO $table(customerID,workReqNo,technician,city,address,servicesType, Quantity, price, paid , Notes, reqDate) VALUES('$customerID','$workReqNo','$technician','$city','$address','$servicesType','$Quantity','$price','$paid','$Notes', '$reqDate')";
+        $stmt = "INSERT INTO $table(customerID,workReqNo,technician,city,address,servicesType, Quantity, price, paid , Notes, reqDate, delegate) VALUES('$customerID','$workReqNo','$technician','$city','$address','$servicesType','$Quantity','$price','$paid','$Notes', '$reqDate', '$delegate')";
         $rows = $con->query($stmt);
         header("Refresh:0;url=index.php");
     }
@@ -84,16 +85,15 @@ if (isset($_POST["editWorkReq"])) {
     if ($_POST['oldNotes'] == $_POST['notes']) {
         $Notes = $_POST['notes'];
     } else {
-        $Notes = $_POST['notes'] . " " . date("ha") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
+        $Notes =  $_POST['notes'] . " -- " . date("h:ia") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
     }
     $oldHappyCall = $_POST['oldHappyCall']; #
     if ($_POST['oldHappyCall'] == $_POST['happyCall']) {
         $happyCall = $_POST['happyCall'];
     } else {
-        $happyCall = $_POST['happyCall'] . " " . date("ha") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
+        $happyCall =  $_POST['happyCall'] . " -- " . date("h:ia") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
     }
     $editedBy =   $_POST['editedBy'];
-
     $table = "workReq";
     global $con;
     $stmt = "UPDATE $table SET 
@@ -135,13 +135,13 @@ if (isset($_POST["EditOrderRequest"])) {
     if ($_POST['oldOrder'] == $_POST['order']) {
         $order = $_POST['order'];
     } else {
-        $order = $_POST['order'] . " " . date("ha") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
+        $order =  $_POST['order'] . " -- " . date("h:ia") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
     }
     $oldnote = $_POST['oldNote']; #
     if ($_POST['oldNote'] == $_POST['note']) {
         $note = $_POST['note'];
     } else {
-        $note = $_POST['note'] . " " . date("ha") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
+        $note =  $_POST['note'] . " -- " . date("h:ia") . " " . date("Y/m/d") . " - " . $_SESSION['wName'];
     }
     $quantity = $_POST['quantity']; #
     $orderID = $_POST['id'];

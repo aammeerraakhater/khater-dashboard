@@ -80,7 +80,7 @@ if (isset($_SESSION['workerID'])) {
                                         <?php foreach ($delegants as $delegate) { ?>
                                             <option <?php if ($customer['delegate'] == $delegate) {
                                                         echo 'selected';
-                                                    } ?> value="<?php echo $delegate; ?>"> <?php echo $delegate; ?> </option>
+                                                    } ?> value="<?php echo $delegate["wName"]; ?>"> <?php echo $delegate["wName"]; ?> </option>
                                         <?php } ?>
                                     </select>
                                     <div class="invalid-feedback">

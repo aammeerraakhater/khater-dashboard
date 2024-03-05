@@ -63,7 +63,7 @@ if (isset($_SESSION['workerID'])) {
                                 <select class="form-select" id="delegate" name="delegate" required>
                                     <option value="" selected disabled>اختر...</option>
                                     <?php foreach ($delegants as $delegant) { ?>
-                                        <option value="<?php echo $delegant ?>"><?php echo $delegant ?></option>
+                                        <option value="<?php echo $delegant['wName'] ?>"><?php echo $delegant['wName'] ?></option>
                                     <?php } ?>
                                 </select>
                                 <div class="invalid-feedback">

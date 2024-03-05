@@ -34,18 +34,9 @@ if (isset($_SESSION['workerID'])) {
                             <?php if (isset($_SESSION['isAdmin']) && ($_SESSION['isAdmin']) == 1) { ?>
                                 <div class="btn-group me-2">
                                     <a class="btn btn-sm btn-outline-secondary" href="./saveXlsx.php?q=workReq" role="button"> مشاركة أوامر العمل</a>
-                                </div><?php } ?>
-                            <div class="dropdown mx-2">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    فلتر للعملاء
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./index.php?city=بنها&servicesType=تكييف"> عملاء بنها - تكييف</a></li>
-                                    <li><a class="dropdown-item" href="./index.php?city=بنها&servicesType=فلتر"> عملاء بنها - فلتر </a></li>
-                                    <li><a class="dropdown-item" href="./index.php?city=طوخ&servicesType=تكييف"> عملاء طوخ - تكييف </a></li>
-                                    <li><a class="dropdown-item" href="./index.php?city=طوخ&servicesType=فلتر"> عملاء طوخ - فلتر </a></li>
-                                </ul>
-                            </div>
+                                </div><?php }
+                                    require_once('buttons.php');
+                                        ?>
                             <a class="btn btn-sm btn-outline-secondary" href="./addCustomer.php" role="button"> اضافه عميل</a>
                         </div>
                     </div>

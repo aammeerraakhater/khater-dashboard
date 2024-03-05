@@ -34,18 +34,10 @@ if (isset($_SESSION['workerID'])) {
               <?php if (isset($_SESSION['isAdmin']) && ($_SESSION['isAdmin']) == 1) { ?>
                 <div class="btn-group me-2">
                   <a class="btn btn-sm btn-outline-secondary" href="./saveXlsx.php?q=workReq" role="button"> مشاركة أوامر العمل</a>
-                </div><?php } ?>
-              <div class="dropdown mx-2">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  فلتر للعملاء
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="./index.php?city=بنها&servicesType=تكييف"> عملاء بنها - تكييف</a></li>
-                  <li><a class="dropdown-item" href="./index.php?city=بنها&servicesType=فلتر"> عملاء بنها - فلتر </a></li>
-                  <li><a class="dropdown-item" href="./index.php?city=طوخ&servicesType=تكييف"> عملاء طوخ - تكييف </a></li>
-                  <li><a class="dropdown-item" href="./index.php?city=طوخ&servicesType=فلتر"> عملاء طوخ - فلتر </a></li>
-                </ul>
-              </div>
+                </div><?php }
+                    require_once('buttons.php');
+                      ?>
+
               <a class="btn btn-sm btn-outline-secondary" href="./addCustomer.php" role="button"> اضافه عميل</a>
             </div>
           </div>
@@ -72,6 +64,7 @@ if (isset($_SESSION['workerID'])) {
                   <th scope="col">المدفوع </th>
                   <th scope="col">الباقي </th>
                   <th scope="col">الملاحظات </th> <!-- 16 -->
+                  <th scope="col">Happy call </th> <!-- 17 -->
                 </tr>
               </thead>
               <tbody>
@@ -100,13 +93,13 @@ if (isset($_SESSION['workerID'])) {
                       <td> <select style="width:150px;" class="form-select" id="technician<?php echo $i; ?>" name="technician" onchange="changetechnician(technician<?php echo $i; ?>,<?php echo $result['id']; ?>,this.value)">
                           <option selected value="" disabled>اختر...</option>
                           <?php foreach ($technicians as $technician) { ?>
-                            <option <?php if ($result['technician'] == $technician) {
+                            <option <?php if ($result['technician'] == $technician['wName']) {
                                       echo 'selected';
-                                    } ?> value="<?php echo $technician; ?>"> <?php echo $technician; ?> </option>
+                                    } ?> value="<?php echo $technician['wName']; ?>"> <?php echo $technician['wName']; ?> </option>
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <?php echo $customer['delegate']; ?></td>
+                      <td> <?php echo $result['delegate']; ?></td>
                       <td> <?php echo $result['reqDate']; ?></td>
                       <td> <?php echo $result['operatedDate']; ?></td>
                       <td> <?php echo $result['city']; ?></td>
@@ -119,6 +112,9 @@ if (isset($_SESSION['workerID'])) {
                       <td> <?php echo $result['price'] - $result['paid']; ?></td>
                       <td>
                         <div style="width:300px;"><?php echo $result['Notes']; ?></div>
+                      </td>
+                      <td>
+                        <div style="width:300px;"><?php echo $result['happyCall']; ?></div>
                       </td>
                     </tr>
                 <?php

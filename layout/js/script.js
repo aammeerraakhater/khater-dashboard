@@ -28,16 +28,13 @@ function changetechnician(elementID, id, technician) {
     xmlhttp.open("GET", "sendStatus.php?id=" + id + "&technician=" + technician, true);
     xmlhttp.send();
 }
-function confirmOrder(elementID, id) {
+function confirmOrder(elementID, id, state) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
-
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(elementID).innerHTML = this.responseText;
+        }
     };
-    if (document.getElementById(elementID).checked) {
-        state = 1;
-    } else {
-        state = 0;
-    }
     xmlhttp.open("GET", "sendStatus.php?orderID=" + id + "&state=" + state, true);
     xmlhttp.send();
 
@@ -78,3 +75,11 @@ function capture() {
         })
 }
 
+$(function () {
+    $("span.pw-toggle, span.pw-toggle2").click(function () {
+        var $pwField = $($(this).data().target);
+        var TorP = $pwField.attr('type') == 'password' ? 'text' : 'password';
+        $(this).text(TorP === "password" ? "visibility" : "visibility_off")
+        $pwField.attr('type', TorP);
+    });
+});

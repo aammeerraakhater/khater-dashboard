@@ -7,9 +7,11 @@ $jsPath = "layout/js/";
 include "connect_db.php";
 include "functions.php";
 include $path . "header.php";
-$delegants = array('الحاج أحمد خاطر', 'هلال', 'مصطفى', 'محمد مرسي', 'حسام', 'وهبه', 'الحاج محمد', 'أمنية', 'اخرى');
-$technicians = array('غريب', 'اسلام', 'توفيق', 'خليفه', 'محمد عزب', 'رأفت', 'ايمن', 'نشأت', 'مصطفى', 'توفيق', 'اخرى');
+
+$delegants = getBased('workers', 'isAdmin', 0, 'workerID');
+$technicians = getBased('workers', 'isAdmin', 3, 'workerID');
 $serviceStatuses = array('عمل اليوم', 'شكوى', 'تأجيل', 'تم', 'مطلوب', 'بالورشة', 'استكمال', 'ضروري', 'الغاء');
 $cities = array('بنها', 'طوخ', 'أخرى');
 $serviceTypes = array(' تركيب تكييف', 'صيانه تكييف', ' تركيب فلتر', 'صيانه فلتر', '  مراتب', 'أخرى');
 $customerTypes = array('تكييف', 'فلاتر', 'مراتب');
+$orderStatuses = array('تسعير', 'طلب', 'تم', 'الغاء', 'تواصل مع العميل');

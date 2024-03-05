@@ -26,7 +26,7 @@ if (isset($_GET['id']) & isset($_GET['technician'])) {
 if (isset($_GET['orderID'])) {
     $id = $_GET['orderID'];
     $state = $_GET['state'];
-    $updateCol = "isDone";
+    $updateCol = "orderStatus";
     $reqDate = date("Y/m/d");
     updateSpecific('orders', $id, $updateCol, $state, 'orderID');
     updateSpecific('orders', $id, 'doneDate', $reqDate, 'orderID');

@@ -24,7 +24,7 @@ function getDestinct($table, $column)
 function getBased($table, $column, $columnEle, $arrange)
 {
     global $con;
-    $stmt = "SELECT * FROM $table WHERE $column=' $columnEle' ORDER BY  $arrange DESC";
+    $stmt = "SELECT * FROM $table WHERE $column='$columnEle' ORDER BY  $arrange DESC";
     $rows = $con->query($stmt);
     return $rows;
 }

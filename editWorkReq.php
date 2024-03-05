@@ -80,6 +80,10 @@ if (isset($_SESSION['workerID'])) {
                                     <label for="address" class="form-label">عنوان </label>
                                     <input name="address" type="text" class="form-control" id="address" value="<?php echo $result['address']; ?>">
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="address" class="form-label">المندوب </label>
+                                    <input type="text" class="form-control" id="altCity" name="" value="<?php echo $result['delegate']; ?>" disabled>
+                                </div>
 
                                 <div class="col-sm-6">
                                     <label for="serviceTypes" class="form-label">نوع الخدمه</label>

@@ -79,6 +79,7 @@ if (isset($_SESSION['workerID'])) {
                                     <th scope="col">أمر العمل</th>
                                     <th scope="col">التاريخ</th>
                                     <th scope="col">الفني</th>
+                                    <th scope="col">المندوب</th>
                                     <th scope="col">المدينه</th>
                                     <th scope="col">العنوان</th>
                                     <th scope="col">نوع الخدمه</th>
@@ -117,14 +118,15 @@ if (isset($_SESSION['workerID'])) {
                                         <td> <?php echo $result['reqDate']; ?></td>
                                         <td>
                                             <select style="width:150px;" class="form-select" id="technician<?php echo $i; ?>" name="technician" onchange="changetechnician(technician<?php echo $i; ?>,<?php echo $result['id']; ?>,this.value)">
-                                                <option value="" disabled>اختر...</option>
+                                                <option selected value="" disabled>اختر...</option>
                                                 <?php foreach ($technicians as $technician) { ?>
-                                                    <option <?php if ($result['technician'] == $technician) {
+                                                    <option <?php if ($result['technician'] == $technician['wName']) {
                                                                 echo 'selected';
-                                                            } ?> value="<?php echo $technician; ?>"> <?php echo $technician; ?> </option>
+                                                            } ?> value="<?php echo $technician['wName']; ?>"> <?php echo $technician['wName']; ?> </option>
                                                 <?php } ?>
                                             </select>
                                         </td>
+                                        <td><?php echo $result['delegate']; ?></td>
                                         <td> <?php echo $result['city']; ?></td>
                                         <td>
                                             <div style="width:150px;"> <?php echo $result['address']; ?></div>

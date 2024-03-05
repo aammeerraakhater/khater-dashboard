@@ -85,13 +85,26 @@ if (isset($_SESSION['workerID'])) {
                   <select class="form-select" id="technician" name="technician">
                     <option value="">اختر...</option>
                     <?php foreach ($technicians as $technician) { ?>
-                      <option value="<?php echo $technician ?>"><?php echo $technician ?></option>
+                      <option value="<?php echo $technician['wName'] ?>"><?php echo $technician['wName'] ?></option>
                     <?php } ?>
                   </select>
                   <div class="invalid-feedback">
                     يرجى اختيار اسم الفني
                   </div>
                 </div>
+                <div class="col-sm-6">
+                  <label for="delegate" class="form-label">المندوب</label>
+                  <select class="form-select" id="delegate" name="delegate" required>
+                    <option value="" selected disabled>اختر...</option>
+                    <?php foreach ($delegants as $delegant) { ?>
+                      <option value="<?php echo $delegant['wName'] ?>"><?php echo $delegant['wName'] ?></option>
+                    <?php } ?>
+                  </select>
+                  <div class="invalid-feedback">
+                    يرجى اختيار المندوب
+                  </div>
+                </div>
+
                 <div class="col-sm-6">
                   <label for="servicesType" class="form-label"> نوع الخدمة</label>
                   <select class="form-select" id="servicesType" name="servicesType" onchange="addAlternitave(this.value, 'allServicesTypealt', 'altServicesType', 'servicesType')">
@@ -120,14 +133,14 @@ if (isset($_SESSION['workerID'])) {
 
                 <div class="col-md-4">
                   <label for="quantity" class="form-label">الكمية</label>
-                  <input type="text" class="form-control" id="quantity" name="quantity" required>
+                  <input type="text" class="form-control" id="quantity" name="quantity">
                   <div class="invalid-feedback">
                     الكمية
                   </div>
                 </div>
                 <div class="col-md-4">
                   <label for="price" class="form-label">المبلغ</label>
-                  <input type="text" class="form-control" id="price" name="price" required>
+                  <input type="text" class="form-control" id="price" name="price">
                   <div class="invalid-feedback">
                     المبلغ
                   </div>
@@ -135,7 +148,7 @@ if (isset($_SESSION['workerID'])) {
 
                 <div class="col-md-4">
                   <label for="paid" class="form-label">المدفوع</label>
-                  <input type="text" class="form-control" id="paid" name="paid" placeholder="" required>
+                  <input type="text" class="form-control" id="paid" name="paid" placeholder="">
                   <div class="invalid-feedback">
                     المدفوع
                   </div>

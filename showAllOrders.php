@@ -7,11 +7,13 @@ if (isset($_SESSION['workerID'])) {
     $title = " لوحة تحكم الخاطر ";
     $css = "style.css";
     include "init.php";
-    $state = 0;
     if (isset($_GET['q'])) {
-        $state = 1;
+        $state =  $_GET['q'];
+        $orders = getBased("orders", "orderStatus", $state, "orderID");
+    } else {
+        $orders = getAllData("orders", "orderID");
     }
-    $orders = getBased("orders", "isDone", $state, "orderID");
+
 ?>
 
     <?php require_once 'mainNavbar.php'; ?>
@@ -24,6 +26,8 @@ if (isset($_SESSION['workerID'])) {
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
                         </div>
+                        <?php require_once('buttons.php');
+                        ?>
 
                         <a class="btn btn-sm btn-outline-secondary" href="./addCustomer.php" role="button"> اضافه عميل</a>
                     </div>
@@ -37,12 +41,12 @@ if (isset($_SESSION['workerID'])) {
                                 <th scope="col">تعديل بيانات </th>
                                 <th scope="col">حاله الطلب</th>
                                 <th scope="col">الاسم</th>
+                                <th scope="col">الطالب</th>
+                                <th scope="col">المطلوب منه</th>
                                 <th scope="col">رفم التليفون</th>
                                 <th scope="col">رقم امر العمل</th>
-                                <?php if ($state) { ?>
-                                    <th scope="col">تاريخ تمام الطلب</th>
-                                <?php } else { ?><th scope="col">تاريخ الطلب</th>
-                                <?php } ?>
+                                <th scope="col">تاريخ تمام الطلب</th>
+                                <th scope="col">تاريخ الطلب</th>
                                 <th scope="col">الكميه</th>
                                 <th scope="col">السعر</th>
                                 <th scope="col">المدفوع</th>
@@ -51,8 +55,6 @@ if (isset($_SESSION['workerID'])) {
                                 <th scope="col">ملاحظات</th>
                                 <th scope="col">العنوان</th>
                                 <th scope="col">المدينه</th>
-                                <th scope="col">الطالب</th>
-                                <th scope="col">المطلوب منه</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,17 +69,24 @@ if (isset($_SESSION['workerID'])) {
                                 <tr>
                                     <td><?php echo $i ?></td>
                                     <td> <a href="./editOrder.php?orderID=<?php echo $order['orderID']; ?>&customerID=<?php echo $workReq['customerID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
-                                    <td><input type="checkbox" id="order<?php echo $i; ?>" <?php if ($order['isDone']) {
-                                                                                                echo 'checked';
-                                                                                            } ?> onclick="confirmOrder('order<?php echo $i; ?>',<?php echo $order['orderID']; ?>)"></td>
+                                    <td>
+                                        <select style="width:115px;" class="form-select" id="order<?php echo $i; ?>" name="orderStatus" onchange="confirmOrder(order<?php echo $i; ?>, <?php echo $order['orderID']; ?>,this.value)">
+                                            <option selected value="" disabled>اختر...</option>
+                                            <?php foreach ($orderStatuses as $orderStatus) { ?>
+                                                <option <?php if ($order['orderStatus'] == $orderStatus) {
+                                                            echo 'selected';
+                                                        } ?> value="<?php echo $orderStatus; ?>"> <?php echo $orderStatus; ?> </option>
+                                            <?php } ?>
+                                        </select>
+
+                                    </td>
                                     <td> <?php echo $customer['usrName']; ?></td>
+                                    <td> <?php echo $order['personOrdered']; ?></td>
+                                    <td> <?php echo $order['orderedFrom']; ?></td>
                                     <td> <?php echo $customer['phone']; ?></td>
                                     <td> <?php echo $workReq['workReqNo']; ?></td>
-                                    <?php if ($state) { ?>
-                                        <td><?php echo $order['doneDate']; ?> </td>
-                                    <?php } else { ?><td><?php echo $order['reqDate']; ?> </td>
-                                    <?php } ?>
-
+                                    <td> <?php echo $order['doneDate']; ?></td>
+                                    <td> <?php echo  $order['reqDate']; ?></td>
                                     <td> <?php echo $order['quantity']; ?></td>
                                     <td> <?php echo $order['price']; ?></td>
                                     <td> <?php echo $order['paid']; ?></td>
@@ -90,8 +99,6 @@ if (isset($_SESSION['workerID'])) {
                                     </td>
                                     <td> <?php echo $workReq['city']; ?></td>
                                     <td> <?php echo $workReq['address']; ?></td>
-                                    <td> <?php echo $order['personOrdered']; ?></td>
-                                    <td> <?php echo $order['orderedFrom']; ?></td>
                                 </tr>
                             <?php
                                 $i++;
@@ -106,7 +113,8 @@ if (isset($_SESSION['workerID'])) {
         </div>
     </div>
 
-<?php include "includes/templates/footer.php";
+<?php
+    include "includes/templates/footer.php";
     ob_end_flush();
 } else {
     header("Refresh:0;url=logIn.php");
