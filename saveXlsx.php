@@ -18,7 +18,7 @@ if (isset($_GET['q']) && $_GET['q'] == 'customers') {
     if ($query->num_rows > 0) {
         $i = 1;
         while ($customer = $query->fetch_assoc()) {
-            $lineData =  array($i, $customer['usrName'], $customer['phone'], $customer['delegate'], $customer['servicesType'], $customer['city'], $customer['address']);
+            $lineData =  array($customerID, $customer['usrName'], $customer['phone'], $customer['delegate'], $customer['servicesType'], $customer['city'], $customer['address']);
             $excelData[] = $lineData;
             $i++;
         }
@@ -31,7 +31,7 @@ if (isset($_GET['q']) && $_GET['q'] == 'customers') {
     $fileName = "أوامر العمل_" . date('Y-m-d') . ".xlsx";
 
     // Define column names 
-    $excelData[] = array('#', 'اسم العميل', 'رقم التليفون', 'المندوب', 'رقم امل العمل', 'تاريخ العمل', 'تاريخ تمام العمل', 'الفني', 'نوع الخدمه', 'الكميه', 'السعر', 'المدفوع', 'ملاحظات', 'نوع الخدمه', 'المدينه', 'العنوان');
+    $excelData[] = array('#', 'cusID', 'workreqID', 'اسم العميل', 'رقم التليفون', 'المندوب', 'رقم امل العمل', 'تاريخ العمل', 'تاريخ تمام العمل', 'الفني', 'نوع الخدمه', 'الكميه', 'السعر', 'المدفوع', 'ملاحظات', 'نوع الخدمه', 'المدينه', 'العنوان');
 
     // Fetch records from database and store in an array 
     $query = $con->query("SELECT * FROM workreq ORDER BY id ASC");
@@ -41,7 +41,7 @@ if (isset($_GET['q']) && $_GET['q'] == 'customers') {
             $customerID = $row['customerID'];
             $queryCustomer = $con->query("SELECT * FROM customer  WHERE customerID = $customerID");
             $customer = $queryCustomer->fetch_assoc();
-            $lineData =  array($i, $customer['usrName'], $customer['phone'], $customer['delegate'], $row['workReqNo'], $row['reqDate'], $row['operatedDate'], $row['technician'], $row['servicesType'], $row['Quantity'], $row['price'], $row['paid'], $row['Notes'], $row['serviceStatus'], $row['city'], $row['address']);
+            $lineData =  array($i, $customer['customerID'], $row['id'], $customer['usrName'], $customer['phone'], $customer['delegate'], $row['workReqNo'], $row['reqDate'], $row['operatedDate'], $row['technician'], $row['servicesType'], $row['Quantity'], $row['price'], $row['paid'], $row['Notes'], $row['serviceStatus'], $row['city'], $row['address']);
             $excelData[] = $lineData;
             $i++;
         }
