@@ -33,7 +33,7 @@ if (isset($_SESSION['workerID'])) {
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <?php if (isset($_SESSION['isAdmin']) && ($_SESSION['isAdmin']) == 1) { ?>
                                 <div class="btn-group me-2">
-                                    <a class="btn btn-sm btn-outline-secondary" href="./saveXlsx.php?q=workReq" role="button"> مشاركة أوامر العمل</a>
+                                    <a class="btn btn-sm btn-outline-secondary" href="./saveXlsx.php?q=customers" role="button"> مشاركة العملاء</a>
                                 </div><?php }
                                     require_once('buttons.php');
                                         ?>
