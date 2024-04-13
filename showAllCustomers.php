@@ -6,19 +6,7 @@ if (isset($_SESSION['workerID'])) {
     $title = " لوحة تحكم الخاطر ";
     $css = "style.css";
     include "init.php";
-
-    if (isset($_GET['city']) && isset($_GET['servicesType'])) {
-        $city = $_GET['city'];
-        $servicesType = $_GET['servicesType'];
-        $results = getDataBasedOnCityServices("workreq", $city, $servicesType);
-    } elseif (isset($_GET['serviceStatus'])) {
-        $serviceStatus = $_GET['serviceStatus'];
-        $results = getDataBasedStatus("workreq", $serviceStatus);
-    } elseif (isset($_GET['q'])) {
-        $results = getDataBasedMoney("workreq");
-    } else {
-        $results = getAllData("workreq", "id");
-    }
+    $results = getAllData("customer", "customerID");
 ?>
 
     <body>
@@ -60,14 +48,14 @@ if (isset($_SESSION['workerID'])) {
                                 <?php
 
                                 $i = 1;
-                                foreach ($results as $result) {
-                                    $customers = getBased("customer", "customerID", $result['customerID'], 'customerID');
-                                    foreach ($customers as $customer) {
+                                foreach ($results as $customer) {
 
                                 ?>
                                         <tr>
                                             <td><?php echo $i ?></td>
-                                            <td><a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a></td>
+                                            <td>
+                                                <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a>
+                                            </td>
                                             <td> <?php echo $customer['delegate']; ?></td>
                                             <td> <?php echo $customer['city']; ?></td>
                                             <td> <?php echo $customer['address']; ?></td>
@@ -77,7 +65,6 @@ if (isset($_SESSION['workerID'])) {
                                         </tr>
                                 <?php
                                         $i++;
-                                    }
                                 } ?>
                             </tbody>
                         </table>

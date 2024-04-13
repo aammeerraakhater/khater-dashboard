@@ -65,6 +65,7 @@ if (isset($_SESSION['workerID'])) {
                   <th scope="col">الباقي </th>
                   <th scope="col">الملاحظات </th> <!-- 16 -->
                   <th scope="col">Happy call </th> <!-- 17 -->
+                  <th scope="col">اخر تعديل</th> <!-- 17 -->
                 </tr>
               </thead>
               <tbody>
@@ -116,6 +117,8 @@ if (isset($_SESSION['workerID'])) {
                       <td>
                         <div style="width:300px;"><?php echo $result['happyCall']; ?></div>
                       </td>
+                      <td> <?php echo $result['editedBy']; ?></td>
+
                     </tr>
                 <?php
                     $i++;

@@ -49,10 +49,12 @@ if (isset($_POST["submitCustomer"]) || isset($_POST["submitCustomerWithWorkReq"]
         $Notes = $_POST['notes'];
         $delegate = $_POST['delegate'];
         $reqDate = date("Y/m/d");
+        $editedBy =   $_POST['editedBy'];
+        $orderType = $_POST['orderType'] ;
 
         $table = "workreq";
         global $con;
-        $stmt = "INSERT INTO $table(customerID,workReqNo,technician,city,address,servicesType, Quantity, price, paid , Notes, reqDate, delegate) VALUES('$customerID','$workReqNo','$technician','$city','$address','$servicesType','$Quantity','$price','$paid','$Notes', '$reqDate', '$delegate')";
+        $stmt = "INSERT INTO $table(customerID,workReqNo,technician,city,address,servicesType, Quantity, price, paid , Notes, reqDate, delegate, orderType, editedBy) VALUES('$customerID','$workReqNo','$technician','$city','$address','$servicesType','$Quantity','$price','$paid','$Notes', '$reqDate', '$delegate', '$orderType', '$editedBy')";
         $rows = $con->query($stmt);
         header("Refresh:0;url=index.php");
     }
@@ -82,6 +84,7 @@ if (isset($_POST["editWorkReq"])) {
     $price = $_POST['price']; #
     $paid = $_POST['paid']; #
     $oldNotes = $_POST['oldNotes']; #
+    $orderType = $_POST['orderType'] ;
     if ($_POST['oldNotes'] == $_POST['notes']) {
         $Notes = $_POST['notes'];
     } else {
@@ -106,7 +109,8 @@ if (isset($_POST["editWorkReq"])) {
             Notes = '$Notes',
             paid = '$paid',
             happyCall = '$happyCall',
-            editedBy = '$editedBy'
+            editedBy = '$editedBy', 
+            orderType = '$orderType'
             WHERE id =$id";
     $rows = $con->query($stmt);
     header("Refresh:0;url=showUsr.php?customerID=$customerID");

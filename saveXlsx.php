@@ -11,7 +11,7 @@ if (isset($_GET['q']) && $_GET['q'] == 'customers') {
     $fileName = "عملاء الخاطر_" . date('Y-m-d') . ".xlsx";
 
     // Define column names 
-    $excelData[] = array('#', 'الاسم', 'رقم التليفون', 'المندوب', 'نوع الخدمة', 'المدينه ', 'العنوان');
+    $excelData[] = array( 'الاسم', 'رقم التليفون', 'المندوب',  'المدينه ', 'العنوان', 'نوع الخدمه ','#');
 
     // Fetch records from database and store in an array 
     $query = $con->query("SELECT * FROM customer ORDER BY customerID ASC");
@@ -31,7 +31,7 @@ if (isset($_GET['q']) && $_GET['q'] == 'customers') {
     $fileName = "أوامر العمل_" . date('Y-m-d') . ".xlsx";
 
     // Define column names 
-    $excelData[] = array('#', 'cusID', 'اسم العميل', 'رقم التليفون', 'المندوب', 'رقم امل العمل', 'تاريخ العمل', 'تاريخ تمام العمل', 'الفني', 'نوع الخدمه', 'الكميه', 'السعر', 'المدفوع', 'ملاحظات', 'نوع الخدمه', 'المدينه', 'العنوان');
+    $excelData[] = array('id', 'workReqNo', 'reqDate', 'operatedDate', 'technician', 'servicesType', 'Quantity', 'price', 'paid', 'Notes', 'serviceStatus', 'customerID', 'city', 'address', 'happyCall', 'editedBy');
 
     // Fetch records from database and store in an array 
     $query = $con->query("SELECT * FROM workreq ORDER BY id ASC");

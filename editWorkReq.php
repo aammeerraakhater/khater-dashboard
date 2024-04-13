@@ -96,7 +96,7 @@ if (isset($_SESSION['workerID'])) {
                                         <?php } ?>
                                     </select>
                                     <div class="invalid-feedback">
-                                        يرجى إدخال المنطقة
+                                        يرجى ادخال نوع الخدمه
                                     </div>
                                 </div>
                                 <div class="hidden col-sm-6" id="allServicesTypealt">
@@ -106,6 +106,29 @@ if (isset($_SESSION['workerID'])) {
                                         يرجى إدخال نوع الخدمة
                                     </div>
                                 </div>
+
+                                <div class="col-sm-6">
+                                    <label for="orderTypes" class="form-label">نوع الصنف</label>
+                                    <select class="form-select" id="orderTypes" name="orderType" required onchange="addAlternitave(this.value,  'allOrdersTypealt', 'altOrdersType', 'orderType')">
+                                        <option value="" selected disabled>اختر...</option>
+                                        <?php foreach ($orderTypes as $orderType) { ?>
+                                            <option <?php if ($result['orderType'] == $orderType) {
+                                                        echo 'selected';
+                                                    } ?> value="<?php echo $orderType; ?>"> <?php echo $orderType; ?> </option>
+                                        <?php } ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        يرجى إدخال نوع الصنف
+                                    </div>
+                                </div>
+                                <div class="hidden col-sm-6" id="allServicesTypealt">
+                                    <label for="altServicesType" class="form-label">نوع الخدمة</label>
+                                    <input type="text" class="form-control" id="altServicesType" name="">
+                                    <div class="invalid-feedback">
+                                        يرجى إدخال نوع الصنف
+                                    </div>
+                                </div>
+                                
                             </div>
 
                             <hr class="my-4">

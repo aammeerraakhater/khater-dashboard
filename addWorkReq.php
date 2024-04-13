@@ -104,7 +104,7 @@ if (isset($_SESSION['workerID'])) {
                     يرجى اختيار المندوب
                   </div>
                 </div>
-
+                
                 <div class="col-sm-6">
                   <label for="servicesType" class="form-label"> نوع الخدمة</label>
                   <select class="form-select" id="servicesType" name="servicesType" onchange="addAlternitave(this.value, 'allServicesTypealt', 'altServicesType', 'servicesType')">
@@ -125,11 +125,35 @@ if (isset($_SESSION['workerID'])) {
                   </div>
                 </div>
 
+                <div class="col-sm-6">
+                  <label for="orderType" class="form-label"> نوع الصنف</label>
+                  <select class="form-select" id="orderType" name="orderType" onchange="addAlternitave(this.value, 'allOrdersTypealt', 'altOrdersType', 'orderType')">
+                    <option value="">اختر...</option>
+                    <?php foreach ($orderTypes as $orderType) { ?>
+                      <option value="<?php echo $orderType ?>"><?php echo $orderType ?></option>
+                    <?php } ?>
+                  </select>
+                  <div class="invalid-feedback">
+                    نوع الصنف .
+                  </div>
+                </div>
+
+                <div class="hidden col-sm-6" id="allOrdersTypealt">
+                  <label for="altOrdersType" class="form-label">نوع الصنف</label>
+                  <input type="text" class="form-control" id="altOrdersType" name="">
+                  <div class="invalid-feedback">
+                    يرجى إدخال نوع الصنف
+                  </div>
+                </div>
+
               </div>
 
               <hr class="my-4">
 
               <div class="row gy-3">
+              <div class="hidden">
+                <input type="text" class="form-control" name="editedBy" value="<?php echo $_SESSION['wName']; ?>">
+              </div>
 
                 <div class="col-md-4">
                   <label for="quantity" class="form-label">الكمية</label>
