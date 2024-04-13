@@ -1,10 +1,23 @@
 .hidden {
     display: none;
 }
-
+table tbody tr{
+    font-size: 16px;
+}
+table tbody tr.odd{
+    background: rgba(151, 181, 224, 0.3);
+}
 table.dataTable thead th,
 table.dataTable thead td,
 table.dataTable tfoot th,
 table.dataTable tfoot td {
     text-align: right;
+}
+input.form-control.form-control-sm{
+    height: 30px;
+    width: 150px;
+    border-radius: 20px;
+}
+label{
+color:rgb(88, 88, 88);
 }

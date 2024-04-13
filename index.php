@@ -27,7 +27,7 @@ if (isset($_SESSION['workerID'])) {
     <div class="container-fluid">
       <div class="row">
         <?php require_once 'navbar.php'; ?>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <main class="col-md-9 ms-sm-auto mr-0 col-lg-10 ">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">لوحة القيادة</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -89,7 +89,9 @@ if (isset($_SESSION['workerID'])) {
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a></td>
+                      <td> <div style="width:150px;">
+                       <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a>
+                      </div></td>
                       <td> <?php echo $result['workReqNo']; ?></td>
                       <td> <select style="width:150px;" class="form-select" id="technician<?php echo $i; ?>" name="technician" onchange="changetechnician(technician<?php echo $i; ?>,<?php echo $result['id']; ?>,this.value)">
                           <option selected value="" disabled>اختر...</option>
@@ -101,8 +103,9 @@ if (isset($_SESSION['workerID'])) {
                         </select>
                       </td>
                       <td> <?php echo $result['delegate']; ?></td>
-                      <td> <?php echo $result['reqDate']; ?></td>
-                      <td> <?php echo $result['operatedDate']; ?></td>
+
+                      <td> <div style="width:100px;">  <?php echo $result['reqDate']; ?> </div> </td>
+                      <td> <div style="width:100px;">  <?php echo $result['operatedDate']; ?> </div> </td>
                       <td> <?php echo $result['city']; ?></td>
                       <td> <?php echo $result['address']; ?></td>
                       <td> <?php echo $customer['phone']; ?></td>
