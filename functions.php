@@ -13,6 +13,27 @@ function getDataBasedStatus($table, $serviceStatus)
     $rows = $con->query($stmt);
     return $rows;
 }
+function getSum($table = 'workreq', $countElement = 'paid', $condition = 'operatedDate', $monthlyDate)
+{
+    global $con;
+    $stmt = "SELECT SUM($countElement) FROM `$table` WHERE $condition  LIKE '$monthlyDate'";
+    $results = $con->query($stmt);
+    return $results;
+}
+function getCount($table = 'workreq', $countElement = 'id', $condition = 'reqDate',  $monthlyDate)
+{
+    global $con;
+    $stmt = "SELECT COUNT($countElement) FROM $table WHERE $condition  LIKE '$monthlyDate';";
+    $result = $con->query($stmt);
+    return $result;
+}
+function getCountAll($table = 'customer', $countElement = 'customerID')
+{
+    global $con;
+    $stmt = "SELECT COUNT($countElement) FROM $table ;";
+    $result = $con->query($stmt);
+    return $result;
+}
 function getDestinct($table, $column)
 {
     global $con;
@@ -28,6 +49,14 @@ function getBased($table, $column, $columnEle, $arrange)
     $rows = $con->query($stmt);
     return $rows;
 }
+function getDataBasedOn2Elements($table, $element1, $element1Value, $element2,  $element2Value)
+{
+    global $con;
+    $stmt = "SELECT * FROM $table WHERE (($element1='$element1Value') AND ($element2='$element2Value')) ";
+    $rows = $con->query($stmt);
+    return $rows;
+}
+
 function getDataBasedOnCityServices($table, $city, $servicesType)
 {
     global $con;
@@ -65,7 +94,7 @@ function  checkUser($table, $email, $password)
             $_SESSION['wName'] = $row['wName'];
             $_SESSION['isAdmin'] = $row['isAdmin'];
             $_SESSION['msg'] = ' اهلا ' . $_SESSION['wName'];
-            header("Refresh:0;url=./index.php");
+            header("Refresh:1;url=./index.php");
         } else {
             $_SESSION['msg'] = ' باسورد خاطئ';
         }

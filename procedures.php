@@ -50,11 +50,13 @@ if (isset($_POST["submitCustomer"]) || isset($_POST["submitCustomerWithWorkReq"]
         $delegate = $_POST['delegate'];
         $reqDate = date("Y/m/d");
         $editedBy =   $_POST['editedBy'];
-        $orderType = $_POST['orderType'] ;
+        $orderType = $_POST['orderType'];
+        $serviceStatus = $_POST['serviceStatus'];
+
 
         $table = "workreq";
         global $con;
-        $stmt = "INSERT INTO $table(customerID,workReqNo,technician,city,address,servicesType, Quantity, price, paid , Notes, reqDate, delegate, orderType, editedBy) VALUES('$customerID','$workReqNo','$technician','$city','$address','$servicesType','$Quantity','$price','$paid','$Notes', '$reqDate', '$delegate', '$orderType', '$editedBy')";
+        $stmt = "INSERT INTO $table(customerID,workReqNo,serviceStatus,technician,city,address,servicesType, Quantity, price, paid , Notes, reqDate, delegate, orderType, editedBy) VALUES('$customerID','$workReqNo','$serviceStatus','$technician','$city','$address','$servicesType','$Quantity','$price','$paid','$Notes', '$reqDate', '$delegate', '$orderType', '$editedBy')";
         $rows = $con->query($stmt);
         header("Refresh:0;url=index.php");
     }
@@ -84,7 +86,7 @@ if (isset($_POST["editWorkReq"])) {
     $price = $_POST['price']; #
     $paid = $_POST['paid']; #
     $oldNotes = $_POST['oldNotes']; #
-    $orderType = $_POST['orderType'] ;
+    $orderType = $_POST['orderType'];
     if ($_POST['oldNotes'] == $_POST['notes']) {
         $Notes = $_POST['notes'];
     } else {
@@ -158,4 +160,21 @@ if (isset($_POST["EditOrderRequest"])) {
     $stmt = "UPDATE $table SET quantity = '$quantity',Required='$order',price='$price',paid='$paid',serviceType='$serviceType',addNotes='$note' WHERE orderID = '$orderID'";
     $rows = $con->query($stmt);
     header("Refresh:0;url=showAllOrders.php");
+}
+if (isset($_POST['submitWorker'])) {
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $workerType = $_POST['workerType'];
+    $email = '';
+    $hashedPassword = '';
+    if ($workerType == '1' || $workerType == '2') {
+        $email = $_POST['email'];
+        $hashedPassword = sha1($_POST['password']);
+    }
+    $table = "workers";
+    global $con;
+    $stmt = "INSERT INTO $table(wName, wPhone, workerEmail, workerPass, workerLevel)  VALUES ('$name', '$phone','$email','$hashedPassword','$workerType')";
+
+    $rows = $con->query($stmt);
+    header("Refresh:0;url=index.php");
 }

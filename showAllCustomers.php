@@ -1,56 +1,62 @@
-<?php
-ob_start();
-session_start();
+    <?php
+    ob_start();
+    session_start();
 
-if (isset($_SESSION['workerID'])) {
+    // if (isset($_SESSION['workerID'])) {
     $title = " لوحة تحكم الخاطر ";
-    $css = "style.css";
     include "init.php";
+    include "includes/header.php";
     $results = getAllData("customer", "customerID");
-?>
 
-    <body>
+    ?>
 
-        <?php require_once 'mainNavbar.php'; ?>
-        <div class="container-fluid">
-            <div class="row">
-                <?php require_once 'navbar.php'; ?>
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                        <h1 class="h2">لوحة القيادة</h1>
-                        <div class="btn-toolbar mb-2 mb-md-0">
-                            <?php if (isset($_SESSION['isAdmin']) && ($_SESSION['isAdmin']) == 1) { ?>
-                                <div class="btn-group me-2">
-                                    <a class="btn btn-sm btn-outline-secondary" href="./saveXlsx.php?q=customers" role="button"> مشاركة العملاء</a>
-                                </div><?php }
-                                    require_once('buttons.php');
-                                        ?>
-                            <a class="btn btn-sm btn-outline-secondary" href="./addCustomer.php" role="button"> اضافه عميل</a>
-                        </div>
-                    </div>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <?php include 'nav.php' ?>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <?php
+            include 'sideNav.php';
+            ?>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="table-responsive card p-2 m-2">
+                        <div class="card-body px-2">
+                            <div class="d-flex flex-row-reverse">
+                                <div class=""><a href="addCustomer.php" class="btn btn-primary">اضافه عميل</a></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4 class="card-title"> العملاء</h4>
+                                </div>
+                            </div>
 
-                    <h2> كل العملاء </h2>
-                    <div class="table-responsive">
-                        <table id="customersTable" class="table align-middle table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">الاسم</th>
-                                    <th scope="col">المندوب</th>
-                                    <th scope="col">المدينه</th>
-                                    <th scope="col">العنوان</th>
-                                    <th scope="col">الموبايل</th>
-                                    <th scope="col">اضافه امر عمل</th>
-                                    <th scope="col">تعديل بيانات العميل</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
 
-                                $i = 1;
-                                foreach ($results as $customer) {
+                            </p>
+                            <table id="customersTable" class="table table-bordered table-striped table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">الاسم</th>
+                                        <th scope="col">المندوب</th>
+                                        <th scope="col">المدينه</th>
+                                        <th scope="col">العنوان</th>
+                                        <th scope="col">الموبايل</th>
+                                        <th scope="col">تعديل</th>
+                                        <th scope="col">اضافه امر عمل</th>
+                                        <th scope="col">اضافه طلب شراء</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
 
-                                ?>
+                                    $i = 1;
+                                    foreach ($results as $customer) {
+
+                                    ?>
+
                                         <tr>
                                             <td><?php echo $i ?></td>
                                             <td>
@@ -60,24 +66,30 @@ if (isset($_SESSION['workerID'])) {
                                             <td> <?php echo $customer['city']; ?></td>
                                             <td> <?php echo $customer['address']; ?></td>
                                             <td> <?php echo $customer['phone']; ?></td>
+                                            <td> <a href="./editCustomer.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
                                             <td> <a href="./addWorkReq.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-success " tabindex="-1" role="button" aria-disabled="true">اضافه </a></td>
-                                            <td> <a href="./editUsr.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
-                                        </tr>
-                                <?php
-                                        $i++;
-                                } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <hr class="my-4">
-                </main>
-            </div>
-        </div>
+                                            <td><a href="./addOrder.php?customerID=<?php echo $customer['customerID']; ?>&id=<?php echo $result['id']; ?>" class="btn  btn-outline-danger " tabindex="-1" role="button" aria-disabled="true">اضافه </a></td>
 
-    <?php
-    include "includes/templates/footer.php";
-    ob_end_flush();
-} else {
-    header("Refresh:0;url=logIn.php");
-}
+                                        <?php
+                                        $i++;
+                                    } ?>
+                                        </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <?php #} 
     ?>
+    <?php include 'includes/footer.php';
+    ob_end_flush();

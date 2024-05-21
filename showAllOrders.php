@@ -1,37 +1,28 @@
 <?php
 ob_start();
 session_start();
+include 'includes/header.php'      ?>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <?php
+    include 'init.php';
+    include 'nav.php'; ?>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <?php
+        include 'sideNav.php';
+        if (isset($_GET['q'])) {
+            $state =  $_GET['q'];
+            $orders = getBased("orders", "orderStatus", $state, "orderID");
+        } else {
+            $orders = getAllData("orders", "orderID");
+        }
 
-if (isset($_SESSION['workerID'])) {
-
-    $title = " لوحة تحكم الخاطر ";
-    $css = "style.css";
-    include "init.php";
-    if (isset($_GET['q'])) {
-        $state =  $_GET['q'];
-        $orders = getBased("orders", "orderStatus", $state, "orderID");
-    } else {
-        $orders = getAllData("orders", "orderID");
-    }
-
-?>
-
-    <?php require_once 'mainNavbar.php'; ?>
-    <div class="container-fluid">
-        <div class="row">
-            <?php require_once 'navbar.php'; ?>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">لوحة القيادة</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                        </div>
-                        <?php require_once('buttons.php');
-                        ?>
-
-                        <a class="btn btn-sm btn-outline-secondary" href="./addCustomer.php" role="button"> اضافه عميل</a>
-                    </div>
-                </div>
+        ?>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
                 <h2> كل الطلبات </h2>
                 <div class="table-responsive">
                     <table id="ordersTable" class="table align-middle table-striped">
@@ -92,10 +83,9 @@ if (isset($_SESSION['workerID'])) {
                                     <td> <?php echo $order['paid']; ?></td>
                                     <td> <?php echo $order['price'] - $order['paid']; ?></td>
                                     <td>
-                                        <div style="width:150px"><?php echo $order['Required']; ?></div>
-                                    </td>
+                                        <div style="width:150px;"><?php echo $order['Required']; ?></div>
                                     <td>
-                                        <div style="width:150px"><?php echo $order['addNotes']; ?></div>
+                                        <div style="width:300px;"><?php echo $order['addNotes']; ?></div>
                                     </td>
                                     <td> <?php echo $workReq['city']; ?></td>
                                     <td> <?php echo $workReq['address']; ?></td>
@@ -107,16 +97,16 @@ if (isset($_SESSION['workerID'])) {
                         </tbody>
                     </table>
                 </div>
-                <hr class="my-4">
 
-            </main>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <!-- partial -->
         </div>
+        <!-- main-panel ends -->
     </div>
-
-<?php
-    include "includes/templates/footer.php";
-    ob_end_flush();
-} else {
-    header("Refresh:0;url=logIn.php");
-}
+    <!-- page-body-wrapper ends -->
+</div>
+<?php include 'includes/footer.php';
+ob_end_flush();
 ?>
