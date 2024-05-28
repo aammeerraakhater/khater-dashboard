@@ -50,7 +50,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-order" aria-expanded="false" aria-controls="ui-basic-order">
                 <i class="mdi mdi-crosshairs-gps menu-icon mx-2"></i>
                 <span class="menu-title">طلبات</span>
@@ -79,7 +79,7 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="./showAllCustomers.php">
                 <i class="mdi mdi-account-multiple-plus  menu-icon mx-2"></i>

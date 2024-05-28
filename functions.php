@@ -20,10 +20,24 @@ function getSum($table = 'workreq', $countElement = 'paid', $condition = 'operat
     $results = $con->query($stmt);
     return $results;
 }
+function getSumbased2($table = 'workreq', $countElement = 'paid', $condition = 'operatedDate', $monthlyDate, $condition2, $condition2ELe)
+{
+    global $con;
+    $stmt = "SELECT SUM($countElement) FROM `$table` WHERE $condition  LIKE '$monthlyDate' AND $condition2 = '$condition2ELe'";
+    $results = $con->query($stmt);
+    return $results;
+}
 function getCount($table = 'workreq', $countElement = 'id', $condition = 'reqDate',  $monthlyDate)
 {
     global $con;
     $stmt = "SELECT COUNT($countElement) FROM $table WHERE $condition  LIKE '$monthlyDate';";
+    $result = $con->query($stmt);
+    return $result;
+}
+function getCountbased2($table = 'workreq', $countElement = 'id', $condition = 'reqDate',  $monthlyDate, $condition2, $condition2ELe)
+{
+    global $con;
+    $stmt = "SELECT COUNT($countElement) FROM $table WHERE $condition  LIKE '$monthlyDate'  AND $condition2 = '$condition2ELe';";
     $result = $con->query($stmt);
     return $result;
 }

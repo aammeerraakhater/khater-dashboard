@@ -1,14 +1,16 @@
-    <?php
-    ob_start();
-    session_start();
+<?php
+ob_start();
+session_start();
 
-    // if (isset($_SESSION['workerID'])) {
-    $title = " لوحة تحكم الخاطر ";
-    include "init.php";
-    include "includes/header.php";
+// if (isset($_SESSION['workerID'])) {
+$title = " لوحة تحكم الخاطر ";
+include "init.php";
+include "includes/header.php";
+if (isset($_SESSION['workerID'])) {
+
     $results = getAllData("customer", "customerID");
 
-    ?>
+?>
 
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
@@ -91,5 +93,8 @@
     </div>
     <?php #} 
     ?>
-    <?php include 'includes/footer.php';
+<?php include 'includes/footer.php';
     ob_end_flush();
+} else {
+    header("Refresh:0;url=login.php");
+}

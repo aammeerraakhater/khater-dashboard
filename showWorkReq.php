@@ -2,13 +2,12 @@
 ob_start();
 session_start();
 include 'init.php';
-include 'includes/header.php'
-?>
-<div class="container-scroller">
-    <?php
-    if (isset($_SESSION['workerID'])) {
+include 'includes/header.php';
+if (isset($_SESSION['workerID'])) {
 
-        include 'nav.php' ?>
+    include 'nav.php'
+?>
+    <div class="container-scroller">
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_sidebar.html -->
@@ -129,26 +128,26 @@ include 'includes/header.php'
             <!-- main-panel ends -->
         </div>
         <!-- page-body-wrapper ends -->
-</div>
-<script>
-    function copyFunction() {
-        // Get the text field
-        var copyText = document.getElementById("toCopyElement");
+    </div>
+    <script>
+        function copyFunction() {
+            // Get the text field
+            var copyText = document.getElementById("toCopyElement");
 
-        // Select the text field
-        copyText.select();
-        copyText.setSelectionRange(0, 99999); // For mobile devices
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
 
-        // Copy the text inside the text field
-        navigator.clipboard.writeText(copyText.value);
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
 
-        // Alert the copied text
-        alert("تم النسخ ");
-    }
-</script>
+            // Alert the copied text
+            alert("تم النسخ ");
+        }
+    </script>
 
 <?php include 'includes/footer.php';
-        ob_end_flush();
-    } else {
-        header("Refresh:0;url=logIn.php");
-    }
+    ob_end_flush();
+} else {
+    header("Refresh:0;url=login.php");
+}
