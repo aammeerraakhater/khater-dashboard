@@ -91,23 +91,35 @@ if (isset($_SESSION['workerID'])) {
                                                     <label for="address" class="form-label">عنوان </label>
                                                     <input name="address" type="text" class="form-control" id="address" value="<?php echo $result['address']; ?>">
                                                 </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <label for="delegate" class="form-label">المندوب</label>
-                                                    <select class="form-select" id="delegate" name="delegate" required <?php if ($_SESSION['isAdmin'] != 1) {
-                                                                                                                            echo 'disabled';
-                                                                                                                        } ?>>
-                                                        <option value="" selected disabled>اختر...</option>
-                                                        <?php foreach ($delegants as $delegant) { ?>
-                                                            <option <?php if ($result['delegate'] == $delegant['wName']) {
-                                                                        echo 'selected';
-                                                                    } ?> value="<?php echo $delegant['wName'] ?>"><?php echo $delegant['wName'] ?></option>
-                                                        <?php } ?>
-                                                    </select>
+                                                <?php if ($_SESSION['isAdmin'] != 1) { ?>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <label for="delegate" class="form-label">المندوب </label>
+                                                        <input name="delegate" type="text" class="form-control" id="delegate" value="<?php echo $result['delegate']; ?>">
+                                                    </div><?php } else {  ?>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <label for="delegate" class="form-label">المندوب</label>
+                                                        <select class="form-select" id="delegate" name="delegate" onchange="addAlternitave(this.value, 'allDelegatealt', 'altDelegate', 'delegate')">
+                                                            <option value="" selected disabled>اختر...</option>
+                                                            <?php foreach ($delegants as $delegant) { ?>
+                                                                <option <?php if ($result['delegate'] == $delegant['wName']) {
+                                                                            $selected = true;
+                                                                            echo 'selected';
+                                                                        } ?> value="<?php echo $delegant['wName'] ?>"><?php echo $delegant['wName'] ?></option>
+                                                            <?php } ?>
+                                                            <?php if (!$selected) { ?> <option value="أخرى" selected>أخرى</option>
+                                                            <?php } ?>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            يرجى اختيار المندوب
+                                                        </div>
+                                                    </div><?php } ?>
+                                                <div class="hidden col-sm-6" id="allDelegatealt">
+                                                    <label for="altDelegate" class="form-label">المندوب </label>
+                                                    <input type="text" class="form-control" id="altDelegate" name="">
                                                     <div class="invalid-feedback">
-                                                        يرجى اختيار المندوب
+                                                        يرجى إدخال المندوب
                                                     </div>
                                                 </div>
-
 
                                                 <div class="col-sm-6">
                                                     <label for="serviceTypes" class="form-label">نوع الخدمه</label>

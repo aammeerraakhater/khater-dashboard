@@ -110,7 +110,7 @@ if (isset($_SESSION['workerID'])) {
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="delegate" class="form-label">المندوب</label>
-                                                <select class="form-select" id="delegate" name="delegate" onchange="addAlternitave(this.value, 'altdelegate', 'altdelegate', 'delegate')">
+                                                <select class="form-select" id="delegate" name="delegate" onchange="addAlternitave(this.value, 'allDelegatealt', 'altDelegate', 'delegate')">
                                                     <option value="" selected disabled>اختر...</option>
                                                     <?php foreach ($delegants as $delegant) { ?>
                                                         <option value="<?php echo $delegant['wName'] ?>"><?php echo $delegant['wName'] ?></option>
@@ -122,19 +122,14 @@ if (isset($_SESSION['workerID'])) {
                                                     يرجى اختيار المندوب
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <label for="altdelegate" class="form-label">المندوب</label>
-                                                <select class="form-select" id="altdelegate" name="delegate">
-                                                    <option value="" selected disabled>اختر...</option>
-                                                    <?php foreach ($technicians as $technician) { ?>
-                                                        <option value="<?php echo $technician['wName'] ?>"><?php echo $technician['wName'] ?></option>
-                                                    <?php } ?>
-
-                                                </select>
+                                            <div class="hidden col-sm-6" id="allDelegatealt">
+                                                <label for="altDelegate" class="form-label">المندوب </label>
+                                                <input type="text" class="form-control" id="altDelegate" name="">
                                                 <div class="invalid-feedback">
-                                                    يرجى اختيار المندوب
+                                                    يرجى إدخال المندوب
                                                 </div>
                                             </div>
+
                                             <div class="col-sm-6">
                                                 <label for="orderType" class="form-label"> نوع الصنف</label>
                                                 <select class="form-select" id="orderType" name="orderType" onchange="addAlternitave(this.value, 'allOrdersTypealt', 'altOrdersType', 'orderType')">
