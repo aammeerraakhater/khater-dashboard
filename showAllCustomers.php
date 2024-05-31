@@ -66,7 +66,9 @@ if (isset($_SESSION['workerID'])) {
                                             </td>
                                             <td> <?php echo $customer['delegate']; ?></td>
                                             <td> <?php echo $customer['city']; ?></td>
-                                            <td> <?php echo $customer['address']; ?></td>
+                                            <td>
+                                                <div style="padding:5px;max-width:450px;overflow: auto;"> <?php echo $customer['address']; ?></div>
+                                            </td>
                                             <td> <?php echo $customer['phone']; ?></td>
                                             <td> <a href="./editCustomer.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-info " tabindex="-1" role="button" aria-disabled="true">تعديل </a></td>
                                             <td> <a href="./addWorkReq.php?customerID=<?php echo $customer['customerID']; ?>" class="btn  btn-outline-success " tabindex="-1" role="button" aria-disabled="true">اضافه </a></td>

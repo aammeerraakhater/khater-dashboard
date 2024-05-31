@@ -43,6 +43,8 @@ if (isset($_POST["submitCustomer"]) || isset($_POST["submitCustomerWithWorkReq"]
         $city = $_POST['city']; #
         $address = $_POST['address']; #
         $servicesType = $_POST['servicesType'];
+        $operatedDate = "";
+        $serviceStatus = "";
         $Quantity = $_POST['quantity']; #
         $price = $_POST['price']; #
         $paid = $_POST['paid']; #
@@ -51,12 +53,16 @@ if (isset($_POST["submitCustomer"]) || isset($_POST["submitCustomerWithWorkReq"]
         $reqDate = date("Y/m/d");
         $editedBy =   $_POST['editedBy'];
         $orderType = $_POST['orderType'];
-        $serviceStatus = $_POST['serviceStatus'];
+        if (isset($_POST['serviceStatus'])) {
+            $serviceStatus = $_POST['serviceStatus'];
+            $operatedDate = date("Y/m/d");
+        }
+
 
 
         $table = "workreq";
         global $con;
-        $stmt = "INSERT INTO $table(customerID,workReqNo,serviceStatus,technician,city,address,servicesType, Quantity, price, paid , Notes, reqDate, delegate, orderType, editedBy) VALUES('$customerID','$workReqNo','$serviceStatus','$technician','$city','$address','$servicesType','$Quantity','$price','$paid','$Notes', '$reqDate', '$delegate', '$orderType', '$editedBy')";
+        $stmt = "INSERT INTO $table(customerID,workReqNo,serviceStatus,technician,city,address,servicesType, Quantity, price, paid , Notes, reqDate, delegate, orderType, editedBy, operatedDate) VALUES('$customerID','$workReqNo','$serviceStatus','$technician','$city','$address','$servicesType','$Quantity','$price','$paid','$Notes', '$reqDate', '$delegate', '$orderType', '$editedBy', '$operatedDate')";
         $rows = $con->query($stmt);
         header("Refresh:0;url=index.php");
     }
@@ -171,9 +177,10 @@ if (isset($_POST['submitWorker'])) {
         $email = $_POST['email'];
         $hashedPassword = sha1($_POST['password']);
     }
+    $isStillWorking = 1;
     $table = "workers";
     global $con;
-    $stmt = "INSERT INTO $table(wName, wPhone, workerEmail, workerPass, workerLevel)  VALUES ('$name', '$phone','$email','$hashedPassword','$workerType')";
+    $stmt = "INSERT INTO $table(wName, wPhone, workerEmail, workerPass, workerLevel,isStillWorking)  VALUES ('$name', '$phone','$email','$hashedPassword','$workerType','$isStillWorking')";
 
     $rows = $con->query($stmt);
     header("Refresh:0;url=index.php");

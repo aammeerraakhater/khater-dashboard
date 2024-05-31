@@ -110,11 +110,26 @@ if (isset($_SESSION['workerID'])) {
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="delegate" class="form-label">المندوب</label>
-                                                <select class="form-select" id="delegate" name="delegate" required>
+                                                <select class="form-select" id="delegate" name="delegate" onchange="addAlternitave(this.value, 'altdelegate', 'altdelegate', 'delegate')">
                                                     <option value="" selected disabled>اختر...</option>
                                                     <?php foreach ($delegants as $delegant) { ?>
                                                         <option value="<?php echo $delegant['wName'] ?>"><?php echo $delegant['wName'] ?></option>
                                                     <?php } ?>
+                                                    <option value="أخرى">أخرى</option>
+
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    يرجى اختيار المندوب
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="altdelegate" class="form-label">المندوب</label>
+                                                <select class="form-select" id="altdelegate" name="delegate">
+                                                    <option value="" selected disabled>اختر...</option>
+                                                    <?php foreach ($technicians as $technician) { ?>
+                                                        <option value="<?php echo $technician['wName'] ?>"><?php echo $technician['wName'] ?></option>
+                                                    <?php } ?>
+
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     يرجى اختيار المندوب

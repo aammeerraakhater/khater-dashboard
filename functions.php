@@ -41,10 +41,24 @@ function getCountbased2($table = 'workreq', $countElement = 'id', $condition = '
     $result = $con->query($stmt);
     return $result;
 }
-function getCountAll($table = 'customer', $countElement = 'customerID')
+function getCountbasedLike($table = 'workreq', $countElement = 'id', $condition = 'reqDate',  $monthlyDate, $condition2, $condition2ELe)
+{
+    global $con;
+    $stmt = "SELECT COUNT($countElement) FROM $table WHERE $condition LIKE '$monthlyDate'  AND $condition2 LIKE '$condition2ELe';";
+    $result = $con->query($stmt);
+    return $result;
+}
+function getCountAll($table, $countElement)
 {
     global $con;
     $stmt = "SELECT COUNT($countElement) FROM $table ;";
+    $result = $con->query($stmt);
+    return $result;
+}
+function getCountAllBased($table, $countElement, $condition, $conditionEle)
+{
+    global $con;
+    $stmt = "SELECT COUNT($countElement) FROM $table WHERE $condition LIKE '$conditionEle';";
     $result = $con->query($stmt);
     return $result;
 }
@@ -106,6 +120,7 @@ function  checkUser($table, $email, $password)
             $_SESSION['workerID'] = $row['workerID'];
             $_SESSION['workerEmail '] = $row['workerEmail'];
             $_SESSION['wName'] = $row['wName'];
+            $_SESSION['workerLevel'] = $row['workerLevel'];
             $_SESSION['isAdmin'] = $row['isAdmin'];
             $_SESSION['msg'] = ' اهلا ' . $_SESSION['wName'];
             header("Refresh:1;url=./index.php");

@@ -194,7 +194,7 @@ if (isset($_SESSION['workerID'])) {
                                                 </div>
                                             </div>
 
-                                            <button class="btn btn-primary " name="editWorkReq" type="submit"> تعديل اذن الصرف </button>
+                                            <button class="btn btn-primary mt-2" name="editWorkReq" type="submit"> تعديل اذن الصرف </button>
                                         </form>
                                     </div>
                                 </div>

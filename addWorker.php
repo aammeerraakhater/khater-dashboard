@@ -45,9 +45,10 @@ if (isset($_SESSION['workerID'])) {
                                             <label for="workerType" class="form-label">المندوب</label>
                                             <select class="form-select" id="workerType" name="workerType" required onchange="viewWorkerThings(this.value, 'showEmail','showPassword','email', 'password')">
                                                 <option value="" selected disabled>اختر...</option>
-                                                <option value="1">تشغيل</option>
+                                                <option value="1">مبيعات</option>
                                                 <option value="2">محاسب</option>
                                                 <option value="3">فني</option>
+                                                <option value="4">تشغيل</option>
                                             </select>
                                             <div class="invalid-feedback">
                                                 يرجى اختيار المندوب

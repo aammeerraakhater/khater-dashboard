@@ -4,22 +4,23 @@ session_start();
 include 'includes/header.php';
 include 'init.php';
 if (isset($_SESSION['workerID'])) {
-    include 'nav.php';
+
 ?>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
-
-        <?php ?>
+        <?php
+        include 'nav.php'; ?>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_sidebar.html -->
             <?php
             include 'sideNav.php';
             ?>
+
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <main class="px-md-4">
                         <?php
                         if (isset($_GET['customerID'])) {
                             $customerID = $_GET['customerID'];
@@ -129,7 +130,7 @@ if (isset($_SESSION['workerID'])) {
                                                 <td><?php echo $result['delegate']; ?></td>
                                                 <td> <?php echo $result['city']; ?></td>
                                                 <td>
-                                                    <div style="width:150px;"> <?php echo $result['address']; ?></div>
+                                                    <div style="padding:5px;max-width:450px;overflow: auto;"> <?php echo $result['address']; ?></div>
                                                 </td>
                                                 <td> <?php echo $result['servicesType']; ?></td>
                                                 <td> <?php echo $result['Quantity']; ?></td>
