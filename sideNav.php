@@ -87,15 +87,6 @@
 
             </a>
         </li>
-        <?php if ($_SESSION['isAdmin'] == 1) { ?>
-            <li class="nav-item">
-                <a class="nav-link" href="./addWorker.php">
-                    <i class=" mdi mdi-account-plus  menu-icon mx-2"></i>
-                    <span class="menu-title">اضافة مندوب / فني</span>
-
-                </a>
-            </li>
-        <?php } ?>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-delicate" aria-expanded="false" aria-controls="ui-basic-delicate">
                 <i class="mdi mdi-clipboard-account menu-icon mx-2"></i>
@@ -132,6 +123,23 @@
                 </ul>
             </div>
         </li>
+        <?php if ($_SESSION['isAdmin'] == 1) { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="./addWorker.php">
+                    <i class=" mdi mdi-account-plus  menu-icon mx-2"></i>
+                    <span class="menu-title">اضافة مندوب / فني</span>
+
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./saveXlsx.php?q=customers" role="button"> <i class=" mdi mdi-account-plus  menu-icon mx-2"></i>مشاركة العملاء</a>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="./saveXlsx.php?q=workReq" role="button"> <i class=" mdi mdi-account-plus  menu-icon mx-2"></i>مشاركة أوامر العمل</a>
+
+            </li>
+        <?php } ?>
+
+
 
     </ul>
 </nav>

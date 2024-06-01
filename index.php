@@ -140,7 +140,7 @@ if (isset($_SESSION['workerID'])) {
                                   </select>
                                 </td>
                                 <td>
-                                  <div style="width:150px;">
+                                  <div style="padding:5px;max-width:250px;overflow: auto;">
                                     <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a>
                                   </div>
                                 </td>
@@ -252,7 +252,7 @@ if (isset($_SESSION['workerID'])) {
                                   </select>
                                 </td>
                                 <td>
-                                  <div style="width:150px;">
+                                  <div style="padding:5px;max-width:250px;overflow: auto;">
                                     <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a>
                                   </div>
                                 </td>

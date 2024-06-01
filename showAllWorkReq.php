@@ -48,10 +48,10 @@ if (isset($_SESSION['workerID'])) {
                                 <form action="" method="GET">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <input type="date" name="date" value="<?= isset($_GET['date']) == true ? $_GET['date'] : '' ?>" class="form-control">
+                                            <input type="date" name="date" value="<?= isset($_GET['date']) == true ? $_GET['date'] : '' ?>" class="form-control" required>
                                         </div>
                                         <div class="col-md-4">
-                                            <select style="width:115px;" class="form-select" name="serviceStatusDated">
+                                            <select style="width:115px;" class="form-select" name="serviceStatusDated" required>
                                                 <option value="" disabled selected>اختر...</option>
                                                 <?php foreach ($serviceStatuses as $serviceStatus) { ?>
                                                     <option <?php if (isset($_GET['serviceStatusDated']) && $_GET['serviceStatusDated'] == $serviceStatus) {
@@ -62,7 +62,7 @@ if (isset($_SESSION['workerID'])) {
                                         </div>
                                         <div class="col-md-4">
                                             <button type="submit" class="btn btn-primary">بحث</button>
-                                            <a href="showWorkReq.php" class="btn btn-danger">مسح</a>
+                                            <a href="showAllWorkReq.php" class="btn btn-danger">مسح</a>
                                         </div>
                                     </div>
                                 </form>
@@ -118,7 +118,7 @@ if (isset($_SESSION['workerID'])) {
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <div style="width:150px;">
+                                                        <div style="padding:5px;max-width:250px;overflow: auto;">
                                                             <a href="./showUsr.php?customerID=<?php echo $customer['customerID']; ?>" aria-disabled="true" class="text-decoration-none"> <?php echo $customer['usrName']; ?></a>
                                                         </div>
                                                     </td>
