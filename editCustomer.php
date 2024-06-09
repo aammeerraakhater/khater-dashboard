@@ -114,14 +114,7 @@ if (isset($_SESSION['workerID'])) {
                                         </form>
                                     </div>
                                 </div>
-                            <?php } else { ?>
-                                <div class="py-3  text-center">
-                                    <h2>برجاء اختيار عميل لادخال امر العمل </h2>
-                                    <a class="btn btn-sm btn-outline-secondary" href="./allCustomers.php" role="button"> الرجوع لصفحه العملاء </a>
 
-                                </div>
-
-                            <?php   } ?>
                             </main>
                         </div>
 
@@ -132,6 +125,14 @@ if (isset($_SESSION['workerID'])) {
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+<?php } else { ?>
+    <div class="py-3  text-center">
+        <h2>برجاء اختيار عميل لادخال امر العمل </h2>
+        <a class="btn btn-sm btn-outline-secondary" href="./allCustomers.php" role="button"> الرجوع لصفحه العملاء </a>
+
+    </div>
+
+<?php   } ?>
 <?php include "includes/footer.php";
     ob_end_flush();
 } else {
