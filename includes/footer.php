@@ -19,7 +19,6 @@
     <!-- Extra / optional  -->
     <script src="assets/js/script.js"></script>
     <script src="assets/js/html2canva.js"></script>
-    <script src="assets/js/<?php echo $js; ?>"></script>
     <!-- Table settings -->
     <script src="assets/js/form-validation.js"></script>
     <script src="assets/js/dataTable.js"></script>
