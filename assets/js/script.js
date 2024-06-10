@@ -55,7 +55,7 @@ function addAlternitave(city, id, showedEleID, showedEleName) {
 function viewWorkerThings(workerType, id1, id2, showedEleID1, showedEleID2) {
     var element1 = document.getElementById(id1);
     var element2 = document.getElementById(id2);
-    if (workerType =='1' || workerType=='2') {
+    if (workerType =='1' || workerType=='2'|| workerType=='4') {
         element1.classList.remove("hidden");
         element2.classList.remove("hidden");
         document.getElementById(showedEleID1).required = true;
